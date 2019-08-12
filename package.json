@@ -1,6 +1,6 @@
 {
   "name": "planetary interaction",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "EVE online prices",
   "main": "src/server/index.js",
   "scripts": {
