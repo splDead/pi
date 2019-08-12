@@ -1,0 +1,28 @@
+th {
+    padding: 10px;
+    background: rgba(0,0,0,0.05);
+}
+
+td {
+    padding: 5px 10px;
+}
+
+.row-odd td {
+    background-color: rgba(0,0,0,0.03);
+}
+
+.price-table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+.column-name {
+    width: 50%;
+    text-align: left;
+}
+
+.column-price {
+    width: 25%;
+    text-align: right;
+}

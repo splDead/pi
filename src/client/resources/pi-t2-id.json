@@ -1,0 +1,98 @@
+[
+  {
+    "label": "Biocells",
+    "value": "2329"
+  },
+  {
+    "label": "Construction Blocks",
+    "value": "3828"
+  },
+  {
+    "label": "Consumer Electronics",
+    "value": "9836"
+  },
+  {
+    "label": "Coolant",
+    "value": "9832"
+  },
+  {
+    "label": "Enriched Uranium",
+    "value": "44"
+  },
+  {
+    "label": "Fertilizer",
+    "value": "3693"
+  },
+  {
+    "label": "Genetically Enhanced Livestock",
+    "value": "15317"
+  },
+  {
+    "label": "Livestock",
+    "value": "3725"
+  },
+  {
+    "label": "Mechanical Parts",
+    "value": "3689"
+  },
+  {
+    "label": "Microfiber Shielding",
+    "value": "2327"
+  },
+  {
+    "label": "Miniature Electronics",
+    "value": "9842"
+  },
+  {
+    "label": "Nanites",
+    "value": "2463"
+  },
+  {
+    "label": "Oxides",
+    "value": "2317"
+  },
+  {
+    "label": "Polyaramids",
+    "value": "2321"
+  },
+  {
+    "label": "Polytextiles",
+    "value": "3695"
+  },
+  {
+    "label": "Rocket Fuel",
+    "value": "9830"
+  },
+  {
+    "label": "Silicate Glass",
+    "value": "3697"
+  },
+  {
+    "label": "Superconductors",
+    "value": "9838"
+  },
+  {
+    "label": "Supertensile Plastics",
+    "value": "2312"
+  },
+  {
+    "label": "Synthetic Oil",
+    "value": "3691"
+  },
+  {
+    "label": "Test Cultures",
+    "value": "2319"
+  },
+  {
+    "label": "Transmitter",
+    "value": "9840"
+  },
+  {
+    "label": "Viral Agent",
+    "value": "3775"
+  },
+  {
+    "label": "Water-Cooled CPU",
+    "value": "2328"
+  }
+]

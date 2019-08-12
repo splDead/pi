@@ -1,7 +1,7 @@
 {
-  "name": "simple-react-full-stack",
+  "name": "planetary interaction",
   "version": "1.0.0",
-  "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
+  "description": "EVE online prices",
   "main": "src/server/index.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -10,8 +10,8 @@
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "author": "Sandeep Raveesh",
-  "license": "ISC",
+  "author": "Sergey Goryachev",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.19.0",
     "babel-polyfill": "^6.26.0",

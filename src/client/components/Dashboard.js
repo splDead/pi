@@ -5,23 +5,13 @@ import TablePrice from './TablePrice';
 
 import * as a from '../actions/dashboard';
 
+import './Dashboard.css';
+
 class Dashboard extends React.Component {
 
-    handleSearch = () => {
-        const { ids, system } = this.props;
-
-        if (!ids) {
-            return;
-        }
-
-        let url = `https://api.evemarketer.com/ec/marketstat/json?typeid=${ids.map(el => el.value)}`;
-
-        if (system) {
-            url += `&usesystem=${system.value}`;
-        }
-
-        this.props.loadPrices(url);
-    };
+    componentDidMount() {
+        this.props.loadPrices(this.props.baseUrl);
+    }
 
     render() {
 
@@ -30,8 +20,8 @@ class Dashboard extends React.Component {
         } = this.props;
 
         return (
-            <div>
-                <LoadingForm onLoad={this.handleSearch}/>
+            <div className='layout'>
+                <LoadingForm/>
                 <TablePrice prices={prices} />
             </div>
         )

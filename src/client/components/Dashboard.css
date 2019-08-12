@@ -1,0 +1,6 @@
+.layout {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+}

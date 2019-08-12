@@ -1,0 +1,62 @@
+[
+  {
+    "label": "Bacteria",
+    "value": "2393"
+  },
+  {
+    "label": "Biofuels",
+    "value": "2396"
+  },
+  {
+    "label": "Biomass",
+    "value": "3779"
+  },
+  {
+    "label": "Chiral Structures",
+    "value": "2401"
+  },
+  {
+    "label": "Electrolytes",
+    "value": "2390"
+  },
+  {
+    "label": "Industrial Fibers",
+    "value": "2397"
+  },
+  {
+    "label": "Oxidizing Compound",
+    "value": "2392"
+  },
+  {
+    "label": "Oxygen",
+    "value": "3683"
+  },
+  {
+    "label": "Plasmoids",
+    "value": "2389"
+  },
+  {
+    "label": "Precious Metals",
+    "value": "2399"
+  },
+  {
+    "label": "Proteins",
+    "value": "2395"
+  },
+  {
+    "label": "Reactive Metals",
+    "value": "2398"
+  },
+  {
+    "label": "Silicon",
+    "value": "9828"
+  },
+  {
+    "label": "Toxic Metals",
+    "value": "2400"
+  },
+  {
+    "label": "Water",
+    "value": "3645"
+  }
+]
