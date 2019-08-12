@@ -9,19 +9,19 @@ import './TablePrice.css';
 
 const tables = [
     {
-        label: 't1',
+        label: 'Tier 1',
         arr: t1
     },
     {
-        label: 't2',
+        label: 'Tier 2',
         arr: t2
     },
     {
-        label: 't3',
+        label: 'Tier 3',
         arr: t3
     },
     {
-        label: 't4',
+        label: 'Tier 4',
         arr: t4
     },
 ];
