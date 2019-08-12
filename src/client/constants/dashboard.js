@@ -1,0 +1,3 @@
+export const CHANGE_TYPE_ID = 'CHANGE_TYPE_ID';
+export const CHANGE_SYSTEM_ID = 'CHANGE_SYSTEM_ID';
+export const LOAD_PRICES = 'LOAD_PRICES';

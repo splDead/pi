@@ -1,49 +1,48 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import LoadingForm from './LoadingForm';
 import TablePrice from './TablePrice';
 
+import * as a from '../actions/dashboard';
+
 class Dashboard extends React.Component {
 
-    state = {
-        prices: [],
-        ids: ''
-    };
-
     handleSearch = () => {
-        const { ids } = this.state;
+        const { ids, system } = this.props;
 
         if (!ids) {
             return;
         }
 
-        axios.post(`https://api.evemarketer.com/ec/marketstat/json?typeid=${ids.map(el => el.value)}`)
-            .then(response => {
-                this.setState({
-                    prices: response.data
-                })
-            })
-    };
+        let url = `https://api.evemarketer.com/ec/marketstat/json?typeid=${ids.map(el => el.value)}`;
 
-    handleChangeId = ids => {
-        this.setState({ ids });
+        if (system) {
+            url += `&usesystem=${system.value}`;
+        }
+
+        this.props.loadPrices(url);
     };
 
     render() {
 
         const {
             prices,
-            ids
-        } = this.state;
+        } = this.props;
 
         return (
             <div>
-                <h1>Planetary Interaction</h1>
-                <LoadingForm onLoad={this.handleSearch} id={ids} onChange={this.handleChangeId}/>
+                <LoadingForm onLoad={this.handleSearch}/>
                 <TablePrice prices={prices} />
             </div>
         )
     }
 }
 
-export default Dashboard;
+export default connect(
+    state => state.dashboard,
+    dispatch => ({
+        loadPrices(url) {
+            dispatch(a.loadPrices(url))
+        }
+    })
+)(Dashboard);
