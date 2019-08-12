@@ -1,4 +1,14 @@
 import React from 'react';
+import Select from 'react-select';
+
+import piOpt from '../resources/pi-id.json';
+
+const styles = {
+    container: style => ({
+        ...style,
+        width: 300
+    })
+};
 
 class LoadingForm extends React.Component {
 
@@ -12,12 +22,13 @@ class LoadingForm extends React.Component {
 
         return (
             <div>
-                <label>
-                    <div>
-                        id
-                    </div>
-                    <input type="text" value={id} onChange={onChange}/>
-                </label>
+                <Select
+                    options={piOpt}
+                    onChange={onChange}
+                    value={id}
+                    styles={styles}
+                    isMulti={true}
+                    closeMenuOnSelect={false}/>
                 <div>
                     <button onClick={onLoad}>
                         search

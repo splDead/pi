@@ -1,0 +1,274 @@
+﻿[
+	{
+		"label": "Bacteria",
+		"value": "2393"
+	},
+	{
+		"label": "Biofuels",
+		"value": "2396"
+	},
+	{
+		"label": "Biomass",
+		"value": "3779"
+	},
+	{
+		"label": "Chiral Structures",
+		"value": "2401"
+	},
+	{
+		"label": "Electrolytes",
+		"value": "2390"
+	},
+	{
+		"label": "Industrial Fibers",
+		"value": "2397"
+	},
+	{
+		"label": "Oxidizing Compound",
+		"value": "2392"
+	},
+	{
+		"label": "Oxygen",
+		"value": "3683"
+	},
+	{
+		"label": "Plasmoids",
+		"value": "2389"
+	},
+	{
+		"label": "Precious Metals",
+		"value": "2399"
+	},
+	{
+		"label": "Proteins",
+		"value": "2395"
+	},
+	{
+		"label": "Reactive Metals",
+		"value": "2398"
+	},
+	{
+		"label": "Silicon",
+		"value": "9828"
+	},
+	{
+		"label": "Toxic Metals",
+		"value": "2400"
+	},
+	{
+		"label": "Water",
+		"value": "3645"
+	},
+	{
+		"label": "Biocells",
+		"value": "2329"
+	},
+	{
+		"label": "Construction Blocks",
+		"value": "3828"
+	},
+	{
+		"label": "Consumer Electronics",
+		"value": "9836"
+	},
+	{
+		"label": "Coolant",
+		"value": "9832"
+	},
+	{
+		"label": "Enriched Uranium",
+		"value": "44"
+	},
+	{
+		"label": "Fertilizer",
+		"value": "3693"
+	},
+	{
+		"label": "Genetically Enhanced Livestock",
+		"value": "15317"
+	},
+	{
+		"label": "Livestock",
+		"value": "3725"
+	},
+	{
+		"label": "Mechanical Parts",
+		"value": "3689"
+	},
+	{
+		"label": "Microfiber Shielding",
+		"value": "2327"
+	},
+	{
+		"label": "Miniature Electronics",
+		"value": "9842"
+	},
+	{
+		"label": "Nanites",
+		"value": "2463"
+	},
+	{
+		"label": "Oxides",
+		"value": "2317"
+	},
+	{
+		"label": "Polyaramids",
+		"value": "2321"
+	},
+	{
+		"label": "Polytextiles",
+		"value": "3695"
+	},
+	{
+		"label": "Rocket Fuel",
+		"value": "9830"
+	},
+	{
+		"label": "Silicate Glass",
+		"value": "3697"
+	},
+	{
+		"label": "Superconductors",
+		"value": "9838"
+	},
+	{
+		"label": "Supertensile Plastics",
+		"value": "2312"
+	},
+	{
+		"label": "Synthetic Oil",
+		"value": "3691"
+	},
+	{
+		"label": "Test Cultures",
+		"value": "2319"
+	},
+	{
+		"label": "Transmitter",
+		"value": "9840"
+	},
+	{
+		"label": "Viral Agent",
+		"value": "3775"
+	},
+	{
+		"label": "Water-Cooled CPU",
+		"value": "2328"
+	},
+	{
+		"label": "Biotech Research Reports",
+		"value": "2358"
+	},
+	{
+		"label": "Camera Drones",
+		"value": "2345"
+	},
+	{
+		"label": "Condensates",
+		"value": "2344"
+	},
+	{
+		"label": "Cryoprotectant Solution",
+		"value": "2367"
+	},
+	{
+		"label": "Data Chips",
+		"value": "17392"
+	},
+	{
+		"label": "Gel-Matrix Biopaste",
+		"value": "2348"
+	},
+	{
+		"label": "Guidance Systems",
+		"value": "9834"
+	},
+	{
+		"label": "Hazmat Detection Systems",
+		"value": "2366"
+	},
+	{
+		"label": "Hermetic Membranes",
+		"value": "2361"
+	},
+	{
+		"label": "High-Tech Transmitters",
+		"value": "17898"
+	},
+	{
+		"label": "Industrial Explosives",
+		"value": "2360"
+	},
+	{
+		"label": "Neocoms",
+		"value": "2354"
+	},
+	{
+		"label": "Nuclear Reactors",
+		"value": "2352"
+	},
+	{
+		"label": "Planetary Vehicles",
+		"value": "9846"
+	},
+	{
+		"label": "Robotics",
+		"value": "9848"
+	},
+	{
+		"label": "Smartfab Units",
+		"value": "2351"
+	},
+	{
+		"label": "Supercomputers",
+		"value": "2349"
+	},
+	{
+		"label": "Synthetic Synapses",
+		"value": "2346"
+	},
+	{
+		"label": "Transcranial Microcontrollers",
+		"value": "12836"
+	},
+	{
+		"label": "Ukomi Superconductors",
+		"value": "17136"
+	},
+	{
+		"label": "Vaccines",
+		"value": "28974"
+	},
+	{
+		"label": "Broadcast Node",
+		"value": "2867"
+	},
+	{
+		"label": "Integrity Response Drones",
+		"value": "2868"
+	},
+	{
+		"label": "Nano-Factory",
+		"value": "2869"
+	},
+	{
+		"label": "Organic Mortar Applicators",
+		"value": "2870"
+	},
+	{
+		"label": "Recursive Computing Module",
+		"value": "2871"
+	},
+	{
+		"label": "Self-Harmonizing Power Core",
+		"value": "2872"
+	},
+	{
+		"label": "Sterile Conduits",
+		"value": "2875"
+	},
+	{
+		"label": "Wetware Mainframe",
+		"value": "2876"
+	}
+]
