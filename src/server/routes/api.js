@@ -1,3 +1,4 @@
+const fs = require('fs');
 const evemarketer = require('../evemarketer');
 
 module.exports = (express) => {
@@ -11,6 +12,14 @@ module.exports = (express) => {
                 }
             );
     });
+
+    router.route('/getSystemIds')
+        .post((req, res) => {
+            const raw = fs.readFileSync('./src/server/dict/system-id.json');
+            const ids = JSON.parse(raw);
+
+            res.json(ids);
+        });
 
     return router;
 };

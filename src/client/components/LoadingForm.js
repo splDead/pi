@@ -2,10 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import XLSX from 'xlsx';
+import axios from 'axios';
 
 import * as a from '../actions/dashboard';
-
-import systemOpt from '../resources/system-id.json';
 
 import t1 from '../resources/pi-t1-id.json';
 import t2 from '../resources/pi-t2-id.json';
@@ -42,6 +41,19 @@ const styles = {
 
 class LoadingForm extends React.Component {
 
+    state = {
+        systemIds: []
+    };
+
+    componentDidMount() {
+        axios.post('/api/getSystemIds')
+            .then(response => {
+                this.setState({
+                    systemIds: response.data
+                });
+            });
+    }
+
     handleChangeSystemId = id => {
         this.props.changeSystemId(id);
         this.props.loadPrices(id.value);
@@ -75,13 +87,17 @@ class LoadingForm extends React.Component {
             system
         } = this.props;
 
+        const {
+            systemIds
+        } = this.state;
+
         return (
             <div className='loading-container'>
                 <Select
                     value={system}
                     onChange={this.handleChangeSystemId}
                     styles={styles}
-                    options={systemOpt} />
+                    options={systemIds} />
                 <div className='button-container'>
                     <button className='button' onClick={this.handleGenerate}>
                         generate xlsx
