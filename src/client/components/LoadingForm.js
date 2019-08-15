@@ -9,14 +9,8 @@ import systemOpt from '../resources/system-id.json';
 class LoadingForm extends React.Component {
 
     handleChangeSystemId = id => {
-        let { baseUrl } = this.props;
-
-        if (id) {
-            baseUrl += `&usesystem=${id.value}`;
-        }
-
         this.props.changeSystemId(id);
-        this.props.loadPrices(baseUrl);
+        this.props.loadPrices(id.value);
     };
 
     render() {
@@ -39,8 +33,8 @@ class LoadingForm extends React.Component {
 export default connect(
     state => state.dashboard,
     dispatch => ({
-        loadPrices(url) {
-            dispatch(a.loadPrices(url))
+        loadPrices(id) {
+            dispatch(a.loadPrices(id))
         },
         changeSystemId(id) {
             dispatch(a.changeSystemId(id))

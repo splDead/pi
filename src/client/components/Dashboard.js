@@ -10,7 +10,7 @@ import './Dashboard.css';
 class Dashboard extends React.Component {
 
     componentDidMount() {
-        this.props.loadPrices(this.props.baseUrl);
+        this.props.loadPrices();
     }
 
     render() {

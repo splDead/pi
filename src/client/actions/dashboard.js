@@ -6,8 +6,8 @@ export const changeSystemId = id => ({
     id
 });
 
-export const loadPrices = url => dispatch => {
-    axios.post(url)
+export const loadPrices = (systemId = '') => dispatch => {
+    axios.post('/api/getPrices', { systemId })
         .then(response => {
             dispatch({
                 type: c.LOAD_PRICES,
