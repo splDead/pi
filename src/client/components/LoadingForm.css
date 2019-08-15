@@ -1,0 +1,24 @@
+.loading-container {
+    display: flex;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.button {
+    border: 1px solid #eee;
+    outline: none;
+    padding: 10px;
+    min-width: 100px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: white;
+    white-space: nowrap;
+}
+
+.button:hover {
+    background-color: #eee;
+}
