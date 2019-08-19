@@ -1,23 +1,24 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Dashboard from './components/Dashboard';
-import CalcPage from './components/CalcPage';
+import './App.css';
+import Home from './pages/Home';
+import CalcPage from './pages/CalcPage';
 import MainMenu from './components/MainMenu';
 
-import './app.css';
-
-export default class App extends Component {
+class App extends Component {
     render() {
         return (
             <div className='layout'>
-                <MainMenu />
+                <MainMenu/>
                 <Router>
                     <Switch>
-                        <Route exact path='/' component={Dashboard}/>
-                        <Route path='/calc' component={CalcPage} />
+                        <Route exact path='/' component={Home}/>
+                        <Route path='/calc' component={CalcPage}/>
                     </Switch>
                 </Router>
             </div>
         );
     }
 }
+
+export default App;

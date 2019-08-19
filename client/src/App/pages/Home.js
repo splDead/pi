@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LoadingForm from './LoadingForm';
-import TablePrice from './TablePrice';
+import LoadingForm from '../components/LoadingForm';
+import TablePrice from '../components/TablePrice';
 
 import * as a from '../actions/dashboard';
 
-class Dashboard extends React.Component {
+class Home extends Component {
 
     componentDidMount() {
         this.props.loadPrices();
@@ -33,4 +33,4 @@ export default connect(
             dispatch(a.loadPrices(url))
         }
     })
-)(Dashboard);
+)(Home);

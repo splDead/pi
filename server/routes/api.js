@@ -15,7 +15,7 @@ module.exports = (express) => {
 
     router.route('/getSystemIds')
         .post((req, res) => {
-            const raw = fs.readFileSync('./src/server/dict/system-id.json');
+            const raw = fs.readFileSync('./server/dict/system-id.json');
             const ids = JSON.parse(raw);
 
             res.json(ids);
