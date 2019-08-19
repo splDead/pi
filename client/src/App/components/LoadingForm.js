@@ -94,13 +94,14 @@ class LoadingForm extends React.Component {
         return (
             <div className='loading-container'>
                 <Select
+                    placeholder='Select system'
                     value={system}
                     onChange={this.handleChangeSystemId}
                     styles={styles}
                     options={systemIds} />
                 <div className='button-container'>
                     <button className='button' onClick={this.handleGenerate}>
-                        generate xlsx
+                        Generate XLSX
                     </button>
                 </div>
             </div>

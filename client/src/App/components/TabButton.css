@@ -1,0 +1,17 @@
+.tab-button {
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #fff;
+    transition: all 0.25s;
+    display: inline-flex;
+}
+
+.tab-button.active {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.tab-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}

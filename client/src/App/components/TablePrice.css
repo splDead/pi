@@ -1,3 +1,7 @@
+.tables__container {
+    padding: 0 10px;
+}
+
 th {
     padding: 10px;
     background: rgba(0,0,0,0.05);

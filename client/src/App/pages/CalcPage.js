@@ -1,10 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import MainMenu from '../components/MainMenu';
+import TabButton from '../components/TabButton';
 
 import * as a from '../actions/calc';
 
 import craft from '../resources/craft';
+
+import './CalcPage.css';
 
 const tabs = {
     CALC: 'CALC',
@@ -47,50 +51,60 @@ class CalcPage extends React.Component {
 
         const {
             tax,
-            pricesBySystem
+            pricesBySystem,
+            match
         } = this.props;
 
         return (
-            <div>
-                <div>
-                    <button onClick={() => this.onChangeTabs(tabs.CALC)}>
-                        calc
-                    </button>
-                    <button onClick={() => this.onChangeTabs(tabs.STORAGE)} disabled={true} title='Under construction'>
-                        storage
-                    </button>
-                </div>
-                <hr/>
-                <div>
-                    <label>
-                        <span>Налог: </span>
-                        <input type='text' value={tax} onChange={this.onChangeTax}/>
-                    </label>
-                </div>
-                {activeTab === tabs.CALC
-                    ? <div>
-                        <table>
+            <React.Fragment>
+                <MainMenu match={match} />
+                <div className='page__container'>
+                    <div className='calc-header'>
+                        <div className='calc-tabs'>
+                            <TabButton
+                                onClick={() => this.onChangeTabs(tabs.CALC)}
+                                title='Calculator'
+                                active={activeTab === tabs.CALC}
+                            />
+                            <TabButton
+                                onClick={() => this.onChangeTabs(tabs.STORAGE)}
+                                title='Storage'
+                                active={activeTab === tabs.STORAGE}
+                            />
+                        </div>
+                        {activeTab === tabs.CALC
+                            ? <div className='tax__container'>
+                                <label>
+                                    <div>Сustoms tax: </div>
+                                    <input type='text' value={tax} onChange={this.onChangeTax}/>
+                                </label>
+                            </div>
+                            : null
+                        }
+                    </div>
+                    {activeTab === tabs.CALC
+                        ? <table className='calc-table'>
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th className='column-left'>
                                         System buy
                                     </th>
-                                    <th>
+                                    <th className='column-left'>
                                         System sell
                                     </th>
-                                    <th>
+                                    <th className='column-left'>
                                         Inputs
                                     </th>
-                                    <th>
+                                    <th className='column-left'>
                                         Cost
                                     </th>
-                                    <th>
+                                    <th className='column-left'>
                                         Result
                                     </th>
-                                    <th>
+                                    <th className='column-right'>
                                         Max price by buy
                                     </th>
-                                    <th>
+                                    <th className='column-right'>
                                         Profit
                                     </th>
                                 </tr>
@@ -125,12 +139,12 @@ class CalcPage extends React.Component {
                                     let { cost, max } = maxProfitItem;
 
                                     return (
-                                        <tr key={i}>
+                                        <tr key={i} className={i % 2 === 1 ? 'row-odd' : ''}>
                                             <td>
-                                                {maxProfitItem.buy}
+                                                {maxProfitItem.buy.substr(0, 1) + maxProfitItem.buy.substr(1).toLowerCase()}
                                             </td>
                                             <td>
-                                                {maxProfitItem.sell}
+                                                {maxProfitItem.sell.substr(0, 1) + maxProfitItem.sell.substr(1).toLowerCase()}
                                             </td>
                                             <td>
                                                 {row.inputs.map(elem =>
@@ -145,10 +159,10 @@ class CalcPage extends React.Component {
                                             <td>
                                                 {row.result.name} x {row.result.count}
                                             </td>
-                                            <td>
+                                            <td className='column-right'>
                                                 {max.toFixed(2)}
                                             </td>
-                                            <td>
+                                            <td className='column-right'>
                                                 {(max - cost).toFixed(2)}
                                             </td>
                                         </tr>
@@ -156,13 +170,13 @@ class CalcPage extends React.Component {
                                 })}
                             </tbody>
                         </table>
-                    </div>
-                    : <div>
-                        tab storage
-                        это склад
-                    </div>
-                }
-            </div>
+                        : <div>
+                            tab storage
+                            это склад
+                        </div>
+                    }
+                </div>
+            </React.Fragment>
         )
     }
 }

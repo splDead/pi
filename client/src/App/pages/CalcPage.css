@@ -1,0 +1,52 @@
+.calc-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.calc-tabs {
+    margin: 10px 20px 10px 0;
+}
+
+.tax__container {
+    margin: 10px 0;
+    padding: 0 10px;
+}
+
+.tax__container label {
+    display: flex;
+    align-items: center;
+}
+
+.tax__container label div {
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.tax__container label input {
+    width: 100px;
+    outline: none;
+    border: 1px solid hsl(0, 0%, 80%);
+    transition: all 0.25s;
+    padding: 15px 10px 10px 10px;
+    height: 40px;
+    box-sizing: border-box;
+    font-size: inherit;
+}
+
+.tax__container label input:hover {
+    border: 1px solid hsl(0, 0%, 70%);
+}
+
+.calc-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.column-left {
+    text-align: left;
+}
+
+.column-right {
+    text-align: right;
+}

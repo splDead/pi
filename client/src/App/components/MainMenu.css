@@ -1,0 +1,25 @@
+.main-menu__container {
+    margin: 0;
+    list-style: none;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.main-menu__item {
+    display: inline-block;
+    padding: 10px 20px;
+    transition: all 0.25s;
+}
+
+.main-menu__link.active .main-menu__item {
+    background-color: rgba(0, 0, 0, 0.05)
+}
+
+.main-menu__item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.main-menu__link {
+    text-decoration: none;
+    color: #666;
+}

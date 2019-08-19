@@ -3,13 +3,11 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import CalcPage from './pages/CalcPage';
-import MainMenu from './components/MainMenu';
 
 class App extends Component {
     render() {
         return (
             <div className='layout'>
-                <MainMenu/>
                 <Router>
                     <Switch>
                         <Route exact path='/' component={Home}/>

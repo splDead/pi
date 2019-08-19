@@ -27,7 +27,7 @@ const tables = [
 ];
 
 export default ({ prices }) =>
-    <div>
+    <div className='tables__container'>
         {prices.length > 0 && tables.map((table, i) =>
             <table className='price-table' key={i}>
                 <thead>
