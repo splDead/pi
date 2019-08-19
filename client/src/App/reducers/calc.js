@@ -5,28 +5,34 @@ const initialState = {
         BUY: [],
         SELL: []
     },
-    buySystemId: {
+    buySystem: {
         "label": "Jita",
         "value": 30000142
     },
-    sellSystemId: {
+    sellSystem: {
         "label": "Jita",
         "value": 30000142
     },
-    tax: '',
+    tax: 20,
+    pricesBySystem: {
+        AMARR: [],
+        JITA: [],
+        DODIXIE: [],
+        PERIMETER: []
+    }
 };
 
 const calc = (state = initialState, action) => {
     switch (action.type) {
-        case c.CHANGE_BUY_SYSTEM_ID:
+        case c.CHANGE_BUY_SYSTEM:
             return {
                 ...state,
-                buySystemId: action.id
+                buySystem: action.system
             };
-        case c.CHANGE_SELL_SYSTEM_ID:
+        case c.CHANGE_SELL_SYSTEM:
             return {
                 ...state,
-                sellSystemId: action.id
+                sellSystem: action.system
             };
         case c.LOAD_PRICES:
             return {
@@ -40,6 +46,17 @@ const calc = (state = initialState, action) => {
             return {
                 ...state,
                 tax: action.tax
+            };
+        case c.LOAD_PRICES_BY_SYSTEMS:
+            return {
+                ...state,
+                pricesBySystem: {
+                    ...state.pricesBySystem,
+                    AMARR: action.systems.find(el => el.system === 'AMARR').arr,
+                    JITA: action.systems.find(el => el.system === 'JITA').arr,
+                    DODIXIE: action.systems.find(el => el.system === 'DODIXIE').arr,
+                    PERIMETER: action.systems.find(el => el.system === 'PERIMETER').arr
+                }
             };
         default:
             return state;
