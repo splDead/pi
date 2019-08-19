@@ -29,8 +29,8 @@ class Home extends Component {
 export default connect(
     state => state.dashboard,
     dispatch => ({
-        loadPrices(url) {
-            dispatch(a.loadPrices(url))
+        loadPrices() {
+            dispatch(a.loadPrices())
         }
     })
 )(Home);

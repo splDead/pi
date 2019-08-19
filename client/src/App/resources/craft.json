@@ -1,0 +1,24 @@
+[
+  {
+    "inputs": [
+      {
+        "id": 2396,
+        "count": 40,
+        "tier": 1,
+        "name": "Biofuels"
+      },
+      {
+        "id": 2399,
+        "count": 40,
+        "tier": 1,
+        "name": "Precious Metals"
+      }
+    ],
+    "result": {
+      "id": 2329,
+      "count": 5,
+      "tier": 2,
+      "name": "Biocells"
+    }
+  }
+]
