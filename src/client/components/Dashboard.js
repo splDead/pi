@@ -5,8 +5,6 @@ import TablePrice from './TablePrice';
 
 import * as a from '../actions/dashboard';
 
-import './Dashboard.css';
-
 class Dashboard extends React.Component {
 
     componentDidMount() {
@@ -20,7 +18,7 @@ class Dashboard extends React.Component {
         } = this.props;
 
         return (
-            <div className='layout'>
+            <div>
                 <LoadingForm/>
                 <TablePrice prices={prices} />
             </div>

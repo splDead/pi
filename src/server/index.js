@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const apiRoutes = require('./routes/api')(express);
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 require('./utils/ping');
