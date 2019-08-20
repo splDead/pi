@@ -234,7 +234,7 @@ class CalcPage extends React.Component {
                                                 </td>
                                                 <td className='show-row'>
                                                     <button className='button-show-row' onClick={profit > 0 ? () => this.onExpadedRowOn(indexRow) : null}>
-                                                        show
+                                                        + {uniqTableProfits.length - 1}
                                                     </button>
                                                 </td>
                                             </tr>
@@ -272,7 +272,7 @@ class CalcPage extends React.Component {
                                                     {i === 0
                                                         ? <td className='hide-row'>
                                                             <button className='button-hide-row' onClick={this.onExpandedRowOff}>
-                                                                hide
+                                                                -
                                                             </button>
                                                         </td>
                                                         : null

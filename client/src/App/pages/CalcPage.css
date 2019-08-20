@@ -79,6 +79,7 @@
     background-color: #fff;
     cursor: pointer;
     transition: all 0.25s;
+    border-radius: 3px;
 }
 
 .button-show-row {
