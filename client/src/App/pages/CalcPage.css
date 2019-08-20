@@ -50,3 +50,34 @@
 .column-right {
     text-align: right;
 }
+
+.invisible {
+    display: none;
+}
+
+.first td {
+    border-top: 1px solid #666;
+}
+
+.last td {
+    border-bottom: 1px solid #666;
+}
+
+.hide-row {
+    position: absolute;
+    border: none !important;
+}
+
+.button-hide-row {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    outline: none;
+    padding: 5px 10px;
+    margin: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.button-hide-row:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}

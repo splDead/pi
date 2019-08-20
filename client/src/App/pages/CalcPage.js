@@ -25,7 +25,8 @@ const taxes = {
 class CalcPage extends React.Component {
 
     state = {
-        activeTab: tabs.CALC
+        activeTab: tabs.CALC,
+        expandedRowId: ''
     };
 
     componentDidMount() {
@@ -43,10 +44,19 @@ class CalcPage extends React.Component {
         this.props.changeTax(e.target.value);
     };
 
+    onExpadedRowOn = expandedRowId => {
+        this.setState({ expandedRowId });
+    };
+
+    onExpandedRowOff = () => {
+        this.setState({ expandedRowId: '' });
+    };
+
     render() {
 
         const {
-            activeTab
+            activeTab,
+            expandedRowId
         } = this.state;
 
         const {
@@ -54,6 +64,82 @@ class CalcPage extends React.Component {
             pricesBySystem,
             match
         } = this.props;
+
+        let rows = [];
+        if (pricesBySystem.AMARR.length) {
+            craft.forEach((row, indexRow) => {
+                let costs = [];
+
+                for (let buy in pricesBySystem) {
+                    for (let sell in pricesBySystem) {
+                        let costSystems = [];
+                        row.inputs.forEach(input => {
+                            let tempPrices = [];
+                            for (let s in pricesBySystem) {
+                                tempPrices.push({
+                                    name: s,
+                                    cost: (pricesBySystem[s].find(el => el.sell.forQuery.types[0] === input.id).sell.min + taxes[input.tier] * tax/100) * input.count
+                                });
+                            }
+
+                            let low;
+                            tempPrices.forEach(el => {
+                                if (!low || (low.cost > el.cost)) {
+                                    low = el;
+                                }
+                            });
+
+                            costSystems.push(low);
+                        });
+
+                        let cost = costSystems.reduce((sum, elem) => sum += elem.cost, 0);
+                        let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === row.result.id).buy.max - taxes[row.result.tier] * tax/100) * row.result.count;
+                        let profit = max - cost;
+
+                        let buySystemNames = costSystems.map(el => el.name);
+                        costs.push({
+                            buy: buySystemNames,
+                            sell,
+                            cost,
+                            max,
+                            profit,
+                            key: buySystemNames.join('') + sell + profit,
+                            craftItem: row
+                        });
+                    }
+                }
+
+                let maxProfitItem;
+                let tableProfits = [];
+                costs.forEach(elem => {
+                    if (!maxProfitItem || (maxProfitItem.profit < elem.profit)) {
+                        maxProfitItem = elem;
+                    }
+
+                    if (elem.profit > 0) {
+                        tableProfits.push(elem);
+                    }
+                });
+
+                let uniqTableProfits = [];
+                tableProfits.forEach(t => {
+                    if (!uniqTableProfits.some(el => el.key === t.key)) {
+                        uniqTableProfits.push(t);
+                    }
+                });
+
+                uniqTableProfits.sort((a, b) => b.profit - a.profit);
+
+                rows.push({
+                    maxProfitItem,
+                    uniqTableProfits
+                });
+            });
+        }
+
+        rows.sort((a, b) => {
+            return b.maxProfitItem.profit - a.maxProfitItem.profit
+        });
 
         return (
             <React.Fragment>
@@ -110,86 +196,89 @@ class CalcPage extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {pricesBySystem.AMARR.length > 0 && craft.map((row, i) => {
-                                    let costs = [];
-
-                                    for (let buy in pricesBySystem) {
-                                        for (let sell in pricesBySystem) {
-                                            let costSystems = [];
-                                            row.inputs.forEach(input => {
-                                                let tempPrices = [];
-                                                for (let s in pricesBySystem) {
-                                                    tempPrices.push({
-                                                        name: s,
-                                                        cost: (pricesBySystem[s].find(el => el.sell.forQuery.types[0] === input.id).sell.min + taxes[input.tier] * tax/100) * input.count
-                                                    });
-                                                }
-
-                                                let low;
-                                                tempPrices.forEach(el => {
-                                                    if (!low || (low.cost > el.cost)) {
-                                                        low = el;
-                                                    }
-                                                });
-
-                                                costSystems.push(low);
-                                            });
-
-                                            let cost = costSystems.reduce((sum, elem) => sum += elem.cost, 0);
-                                            let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === row.result.id).buy.max - taxes[row.result.tier] * tax/100) * row.result.count;
-                                            let profit = max - cost;
-
-                                            costs.push({
-                                                buy: costSystems.map(el => el.name),
-                                                sell,
-                                                cost,
-                                                max,
-                                                profit
-                                            });
-                                        }
-                                    }
-
-                                    let maxProfitItem;
-                                    costs.forEach(elem => {
-                                        if (!maxProfitItem || (maxProfitItem.profit < elem.profit)) {
-                                            maxProfitItem = elem;
-                                        }
-                                    });
-
-                                    let { cost, max } = maxProfitItem;
+                                {rows.length > 0 && rows.map((row, indexRow) => {
+                                    let { maxProfitItem, uniqTableProfits } = row;
+                                    let { cost, max, profit, craftItem } = maxProfitItem;
 
                                     return (
-                                        <tr key={i} className={i % 2 === 1 ? 'row-odd' : ''}>
-                                            <td>
-                                                {row.inputs.map(elem =>
-                                                    <div key={elem.id}>
-                                                        {elem.name} x {elem.count}
-                                                    </div>
-                                                )}
-                                            </td>
-                                            <td>
-                                                {maxProfitItem.buy.map((systemBuy, i) =>
-                                                    <div key={i}>
-                                                        {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
-                                                    </div>
-                                                )}
-                                            </td>
-                                            <td>
-                                                {cost.toFixed(2)}
-                                            </td>
-                                            <td>
-                                                {row.result.name} x {row.result.count}
-                                            </td>
-                                            <td className='column-right'>
-                                                {max.toFixed(2)}
-                                            </td>
-                                            <td>
-                                                {maxProfitItem.sell.substr(0, 1) + maxProfitItem.sell.substr(1).toLowerCase()}
-                                            </td>
-                                            <td className='column-right'>
-                                                {(max - cost).toFixed(2)}
-                                            </td>
-                                        </tr>
+                                        <React.Fragment>
+                                            <tr
+                                                key={indexRow}
+                                                className={`${expandedRowId === indexRow ? 'invisible' : ''} ${indexRow % 2 === 1 ? 'row-odd' : ''}`}
+                                                onClick={profit > 0 ? () => this.onExpadedRowOn(indexRow) : null}
+                                            >
+                                                <td>
+                                                    {craftItem.inputs.map(elem =>
+                                                        <div key={elem.id}>
+                                                            {elem.name} x {elem.count}
+                                                        </div>
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {maxProfitItem.buy.map((systemBuy, i) =>
+                                                        <div key={i}>
+                                                            {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
+                                                        </div>
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {cost.toFixed(2)}
+                                                </td>
+                                                <td>
+                                                    {craftItem.result.name} x {craftItem.result.count}
+                                                </td>
+                                                <td className='column-right'>
+                                                    {max.toFixed(2)}
+                                                </td>
+                                                <td>
+                                                    {maxProfitItem.sell.substr(0, 1) + maxProfitItem.sell.substr(1).toLowerCase()}
+                                                </td>
+                                                <td className='column-right'>
+                                                    {profit.toFixed(2)}
+                                                </td>
+                                            </tr>
+                                            {uniqTableProfits.map((uniq, i, list) =>
+                                                <tr key={uniq.key} className={`${expandedRowId !== indexRow || expandedRowId === '' ? 'invisible' : ''} ${i === 0 ? 'first' : ''} ${i === list.length - 1 ? 'last' : ''}`}>
+                                                    <td>
+                                                        {craftItem.inputs.map(elem =>
+                                                            <div key={elem.id}>
+                                                                {elem.name} x {elem.count}
+                                                            </div>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {uniq.buy.map((systemBuy, i) =>
+                                                            <div key={i}>
+                                                                {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
+                                                            </div>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {uniq.cost.toFixed(2)}
+                                                    </td>
+                                                    <td>
+                                                        {craftItem.result.name} x {craftItem.result.count}
+                                                    </td>
+                                                    <td className='column-right'>
+                                                        {uniq.max.toFixed(2)}
+                                                    </td>
+                                                    <td>
+                                                        {uniq.sell.substr(0, 1) + uniq.sell.substr(1).toLowerCase()}
+                                                    </td>
+                                                    <td className='column-right'>
+                                                        {(uniq.max - uniq.cost).toFixed(2)}
+                                                    </td>
+                                                    {i === 0
+                                                        ? <td className='hide-row'>
+                                                            <button className='button-hide-row' onClick={this.onExpandedRowOff}>
+                                                                hide
+                                                            </button>
+                                                        </td>
+                                                        : null
+                                                    }
+                                                </tr>
+                                            )}
+                                        </React.Fragment>
                                     )
                                 })}
                             </tbody>

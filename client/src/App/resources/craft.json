@@ -20,5 +20,511 @@
       "tier": 2,
       "name": "Biocells"
     }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2398,
+        "count": 40,
+        "tier": 1,
+        "name": "Reactive Metals"
+      },
+      {
+        "id": 2400,
+        "count": 40,
+        "tier": 1,
+        "name": "Toxic Metals"
+      }
+    ],
+    "result": {
+      "id": 3828,
+      "count": 5,
+      "tier": 2,
+      "name": "Construction Blocks"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2401,
+        "count": 40,
+        "tier": 1,
+        "name": "Chiral Structures"
+      },
+      {
+        "id": 2400,
+        "count": 40,
+        "tier": 1,
+        "name": "Toxic Metals"
+      }
+    ],
+    "result": {
+      "id": 9836,
+      "count": 5,
+      "tier": 2,
+      "name": "Consumer Electronics"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2390,
+        "count": 40,
+        "tier": 1,
+        "name": "Electrolytes"
+      },
+      {
+        "id": 3645,
+        "count": 40,
+        "tier": 1,
+        "name": "Water"
+      }
+    ],
+    "result": {
+      "id": 9832,
+      "count": 5,
+      "tier": 2,
+      "name": "Coolant"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2400,
+        "count": 40,
+        "tier": 1,
+        "name": "Toxic Metals"
+      },
+      {
+        "id": 2399,
+        "count": 40,
+        "tier": 1,
+        "name": "Precious Metals"
+      }
+    ],
+    "result": {
+      "id": 44,
+      "count": 5,
+      "tier": 2,
+      "name": "Enriched Uranium"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2393,
+        "count": 40,
+        "tier": 1,
+        "name": "Bacteria"
+      },
+      {
+        "id": 2395,
+        "count": 40,
+        "tier": 1,
+        "name": "Proteins"
+      }
+    ],
+    "result": {
+      "id": 3693,
+      "count": 5,
+      "tier": 2,
+      "name": "Fertilizer"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 3779,
+        "count": 40,
+        "tier": 1,
+        "name": "Biomass"
+      },
+      {
+        "id": 2395,
+        "count": 40,
+        "tier": 1,
+        "name": "Proteins"
+      }
+    ],
+    "result": {
+      "id": 15317,
+      "count": 5,
+      "tier": 2,
+      "name": "Genetically Enhanced Livestock"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2396,
+        "count": 40,
+        "tier": 1,
+        "name": "Biofuels"
+      },
+      {
+        "id": 2395,
+        "count": 40,
+        "tier": 1,
+        "name": "Proteins"
+      }
+    ],
+    "result": {
+      "id": 3725,
+      "count": 5,
+      "tier": 2,
+      "name": "Livestock"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2399,
+        "count": 40,
+        "tier": 1,
+        "name": "Precious Metals"
+      },
+      {
+        "id": 2398,
+        "count": 40,
+        "tier": 1,
+        "name": "Reactive Metals"
+      }
+    ],
+    "result": {
+      "id": 3689,
+      "count": 5,
+      "tier": 2,
+      "name": "Mechanical Parts"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2397,
+        "count": 40,
+        "tier": 1,
+        "name": "Industrial Fibers"
+      },
+      {
+        "id": 9828,
+        "count": 40,
+        "tier": 1,
+        "name": "Silicon"
+      }
+    ],
+    "result": {
+      "id": 2327,
+      "count": 5,
+      "tier": 2,
+      "name": "Microfiber Shielding"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2401,
+        "count": 40,
+        "tier": 1,
+        "name": "Chiral Structures"
+      },
+      {
+        "id": 9828,
+        "count": 40,
+        "tier": 1,
+        "name": "Silicon"
+      }
+    ],
+    "result": {
+      "id": 9842,
+      "count": 5,
+      "tier": 2,
+      "name": "Miniature Electronics"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2393,
+        "count": 40,
+        "tier": 1,
+        "name": "Bacteria"
+      },
+      {
+        "id": 2398,
+        "count": 40,
+        "tier": 1,
+        "name": "Reactive Metals"
+      }
+    ],
+    "result": {
+      "id": 2463,
+      "count": 5,
+      "tier": 2,
+      "name": "Nanites"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2392,
+        "count": 40,
+        "tier": 1,
+        "name": "Oxidizing Compound"
+      },
+      {
+        "id": 3683,
+        "count": 40,
+        "tier": 1,
+        "name": "Oxygen"
+      }
+    ],
+    "result": {
+      "id": 2317,
+      "count": 5,
+      "tier": 2,
+      "name": "Oxides"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2392,
+        "count": 40,
+        "tier": 1,
+        "name": "Oxidizing Compound"
+      },
+      {
+        "id": 2397,
+        "count": 40,
+        "tier": 1,
+        "name": "Industrial Fibers"
+      }
+    ],
+    "result": {
+      "id": 2321,
+      "count": 5,
+      "tier": 2,
+      "name": "Polyaramids"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2396,
+        "count": 40,
+        "tier": 1,
+        "name": "Biofuels"
+      },
+      {
+        "id": 2397,
+        "count": 40,
+        "tier": 1,
+        "name": "Industrial Fibers"
+      }
+    ],
+    "result": {
+      "id": 3695,
+      "count": 5,
+      "tier": 2,
+      "name": "Polytextiles"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2390,
+        "count": 40,
+        "tier": 1,
+        "name": "Electrolytes"
+      },
+      {
+        "id": 2389,
+        "count": 40,
+        "tier": 1,
+        "name": "Plasmoids"
+      }
+    ],
+    "result": {
+      "id": 9830,
+      "count": 5,
+      "tier": 2,
+      "name": "Rocket Fuel"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2392,
+        "count": 40,
+        "tier": 1,
+        "name": "Oxidizing Compound"
+      },
+      {
+        "id": 9828,
+        "count": 40,
+        "tier": 1,
+        "name": "Silicon"
+      }
+    ],
+    "result": {
+      "id": 3697,
+      "count": 5,
+      "tier": 2,
+      "name": "Silicate Glass"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2389,
+        "count": 40,
+        "tier": 1,
+        "name": "Plasmoids"
+      },
+      {
+        "id": 3645,
+        "count": 40,
+        "tier": 1,
+        "name": "Water"
+      }
+    ],
+    "result": {
+      "id": 9838,
+      "count": 5,
+      "tier": 2,
+      "name": "Superconductors"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 3779,
+        "count": 40,
+        "tier": 1,
+        "name": "Biomass"
+      },
+      {
+        "id": 3683,
+        "count": 40,
+        "tier": 1,
+        "name": "Oxygen"
+      }
+    ],
+    "result": {
+      "id": 2312,
+      "count": 5,
+      "tier": 2,
+      "name": "Supertensile Plastics"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2390,
+        "count": 40,
+        "tier": 1,
+        "name": "Electrolytes"
+      },
+      {
+        "id": 3683,
+        "count": 40,
+        "tier": 1,
+        "name": "Oxygen"
+      }
+    ],
+    "result": {
+      "id": 3691,
+      "count": 5,
+      "tier": 2,
+      "name": "Synthetic Oil"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2393,
+        "count": 40,
+        "tier": 1,
+        "name": "Bacteria"
+      },
+      {
+        "id": 3645,
+        "count": 40,
+        "tier": 1,
+        "name": "Water"
+      }
+    ],
+    "result": {
+      "id": 2319,
+      "count": 5,
+      "tier": 2,
+      "name": "Test Cultures"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2401,
+        "count": 40,
+        "tier": 1,
+        "name": "Chiral Structures"
+      },
+      {
+        "id": 2389,
+        "count": 40,
+        "tier": 1,
+        "name": "Plasmoids"
+      }
+    ],
+    "result": {
+      "id": 9840,
+      "count": 5,
+      "tier": 2,
+      "name": "Transmitter"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2393,
+        "count": 40,
+        "tier": 1,
+        "name": "Bacteria"
+      },
+      {
+        "id": 3779,
+        "count": 40,
+        "tier": 1,
+        "name": "Biomass"
+      }
+    ],
+    "result": {
+      "id": 3775,
+      "count": 5,
+      "tier": 2,
+      "name": "Viral Agent"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2398,
+        "count": 40,
+        "tier": 1,
+        "name": "Reactive Metals"
+      },
+      {
+        "id": 3645,
+        "count": 40,
+        "tier": 1,
+        "name": "Water"
+      }
+    ],
+    "result": {
+      "id": 2328,
+      "count": 5,
+      "tier": 2,
+      "name": "Water-Cooled CPU"
+    }
   }
 ]
