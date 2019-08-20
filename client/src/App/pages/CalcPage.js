@@ -87,13 +87,10 @@ class CalcPage extends React.Component {
                             <thead>
                                 <tr>
                                     <th className='column-left'>
-                                        System buy
-                                    </th>
-                                    <th className='column-left'>
-                                        System sell
-                                    </th>
-                                    <th className='column-left'>
                                         Inputs
+                                    </th>
+                                    <th className='column-left'>
+                                        System buy
                                     </th>
                                     <th className='column-left'>
                                         Cost
@@ -103,6 +100,9 @@ class CalcPage extends React.Component {
                                     </th>
                                     <th className='column-right'>
                                         Max price by buy
+                                    </th>
+                                    <th className='column-left'>
+                                        System sell
                                     </th>
                                     <th className='column-right'>
                                         Profit
@@ -115,12 +115,32 @@ class CalcPage extends React.Component {
 
                                     for (let buy in pricesBySystem) {
                                         for (let sell in pricesBySystem) {
-                                            let cost = row.inputs.reduce((sum, elem) => sum += ((pricesBySystem[buy].find(el => el.sell.forQuery.types[0] === elem.id).sell.min + taxes[elem.tier] * tax/100) * elem.count), 0);
+                                            let costSystems = [];
+                                            row.inputs.forEach(input => {
+                                                let tempPrices = [];
+                                                for (let s in pricesBySystem) {
+                                                    tempPrices.push({
+                                                        name: s,
+                                                        cost: (pricesBySystem[s].find(el => el.sell.forQuery.types[0] === input.id).sell.min + taxes[input.tier] * tax/100) * input.count
+                                                    });
+                                                }
+
+                                                let low;
+                                                tempPrices.forEach(el => {
+                                                    if (!low || (low.cost > el.cost)) {
+                                                        low = el;
+                                                    }
+                                                });
+
+                                                costSystems.push(low);
+                                            });
+
+                                            let cost = costSystems.reduce((sum, elem) => sum += elem.cost, 0);
                                             let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === row.result.id).buy.max - taxes[row.result.tier] * tax/100) * row.result.count;
                                             let profit = max - cost;
 
                                             costs.push({
-                                                buy,
+                                                buy: costSystems.map(el => el.name),
                                                 sell,
                                                 cost,
                                                 max,
@@ -141,15 +161,16 @@ class CalcPage extends React.Component {
                                     return (
                                         <tr key={i} className={i % 2 === 1 ? 'row-odd' : ''}>
                                             <td>
-                                                {maxProfitItem.buy.substr(0, 1) + maxProfitItem.buy.substr(1).toLowerCase()}
-                                            </td>
-                                            <td>
-                                                {maxProfitItem.sell.substr(0, 1) + maxProfitItem.sell.substr(1).toLowerCase()}
-                                            </td>
-                                            <td>
                                                 {row.inputs.map(elem =>
                                                     <div key={elem.id}>
                                                         {elem.name} x {elem.count}
+                                                    </div>
+                                                )}
+                                            </td>
+                                            <td>
+                                                {maxProfitItem.buy.map((systemBuy, i) =>
+                                                    <div key={i}>
+                                                        {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
                                                     </div>
                                                 )}
                                             </td>
@@ -161,6 +182,9 @@ class CalcPage extends React.Component {
                                             </td>
                                             <td className='column-right'>
                                                 {max.toFixed(2)}
+                                            </td>
+                                            <td>
+                                                {maxProfitItem.sell.substr(0, 1) + maxProfitItem.sell.substr(1).toLowerCase()}
                                             </td>
                                             <td className='column-right'>
                                                 {(max - cost).toFixed(2)}
