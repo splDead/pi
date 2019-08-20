@@ -202,7 +202,10 @@ class CalcPage extends React.Component {
 
                                     return (
                                         <React.Fragment key={indexRow}>
-                                            <tr className={`${uniqTableProfits.length > 1 ? 'expandable' : ''} ${expandedRowId === indexRow ? 'invisible' : ''} ${indexRow % 2 === 1 ? 'row-odd' : ''}`}>
+                                            <tr
+                                                onClick={profit > 0 ? () => this.onExpadedRowOn(indexRow) : null}
+                                                className={`${uniqTableProfits.length > 1 ? 'expandable' : ''} ${expandedRowId === indexRow ? 'invisible' : ''} ${indexRow % 2 === 1 ? 'row-odd' : ''}`}
+                                            >
                                                 <td>
                                                     {craftItem.inputs.map(elem =>
                                                         <div key={elem.id}>
@@ -228,18 +231,20 @@ class CalcPage extends React.Component {
                                                 </td>
                                                 <td>
                                                     {maxProfitItem.sell.substr(0, 1) + maxProfitItem.sell.substr(1).toLowerCase()}
+                                                    {uniqTableProfits.length > 1
+                                                        ? ` + ${uniqTableProfits.length - 1}`
+                                                        : null
+                                                    }
                                                 </td>
                                                 <td className='column-right'>
                                                     {profit.toFixed(2)}
                                                 </td>
-                                                <td className='show-row'>
-                                                    <button className='button-show-row' onClick={profit > 0 ? () => this.onExpadedRowOn(indexRow) : null}>
-                                                        + {uniqTableProfits.length - 1}
-                                                    </button>
-                                                </td>
                                             </tr>
                                             {uniqTableProfits.map((uniq, i, list) =>
-                                                <tr key={uniq.key} className={`${expandedRowId !== indexRow || expandedRowId === '' ? 'invisible' : ''} ${i === 0 ? 'first' : ''} ${i === list.length - 1 ? 'last' : ''}`}>
+                                                <tr
+                                                    onClick={this.onExpandedRowOff}
+                                                    key={uniq.key} className={`${expandedRowId !== indexRow || expandedRowId === '' ? 'invisible' : ''} ${i === 0 ? 'first' : ''} ${i === list.length - 1 ? 'last' : ''}`}
+                                                >
                                                     <td>
                                                         {craftItem.inputs.map(elem =>
                                                             <div key={elem.id}>
@@ -269,14 +274,6 @@ class CalcPage extends React.Component {
                                                     <td className='column-right'>
                                                         {(uniq.max - uniq.cost).toFixed(2)}
                                                     </td>
-                                                    {i === 0
-                                                        ? <td className='hide-row'>
-                                                            <button className='button-hide-row' onClick={this.onExpandedRowOff}>
-                                                                -
-                                                            </button>
-                                                        </td>
-                                                        : null
-                                                    }
                                                 </tr>
                                             )}
                                         </React.Fragment>

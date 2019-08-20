@@ -28,7 +28,7 @@
     outline: none;
     border: 1px solid hsl(0, 0%, 80%);
     transition: all 0.25s;
-    padding: 15px 10px 10px 10px;
+    padding: 13px 10px 10px 10px;
     height: 40px;
     box-sizing: border-box;
     font-size: inherit;
@@ -68,30 +68,4 @@
     position: absolute;
     border: none !important;
     background-color: #fff !important;
-}
-
-.button-show-row,
-.button-hide-row {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    outline: none;
-    padding: 5px 10px;
-    margin: 8px;
-    background-color: #fff;
-    cursor: pointer;
-    transition: all 0.25s;
-    border-radius: 3px;
-}
-
-.button-show-row {
-    margin: 7px;
-    display: none;
-}
-
-.expandable:hover .button-show-row {
-    display: block;
-}
-
-.button-show-row:hover,
-.button-hide-row:hover {
-    background-color: rgba(0, 0, 0, 0.1);
 }
