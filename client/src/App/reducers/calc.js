@@ -1,25 +1,8 @@
 import * as c from '../constants';
 
 const initialState = {
-    prices: {
-        BUY: [],
-        SELL: []
-    },
-    buySystem: {
-        "label": "Jita",
-        "value": 30000142
-    },
-    sellSystem: {
-        "label": "Jita",
-        "value": 30000142
-    },
     tax: 20,
-    pricesBySystem: {
-        AMARR: [],
-        JITA: [],
-        DODIXIE: [],
-        PERIMETER: []
-    }
+    pricesBySystem: {}
 };
 
 const calc = (state = initialState, action) => {
@@ -48,15 +31,14 @@ const calc = (state = initialState, action) => {
                 tax: action.tax
             };
         case c.LOAD_PRICES_BY_SYSTEMS:
+            let pricesBySystem = {};
+            for (let s in action.systems) {
+                pricesBySystem[action.systems[s].system] = action.systems[s].arr;
+            }
+
             return {
                 ...state,
-                pricesBySystem: {
-                    ...state.pricesBySystem,
-                    AMARR: action.systems.find(el => el.system === 'AMARR').arr,
-                    JITA: action.systems.find(el => el.system === 'JITA').arr,
-                    DODIXIE: action.systems.find(el => el.system === 'DODIXIE').arr,
-                    PERIMETER: action.systems.find(el => el.system === 'PERIMETER').arr
-                }
+                pricesBySystem
             };
         default:
             return state;

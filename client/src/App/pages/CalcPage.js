@@ -66,7 +66,7 @@ class CalcPage extends React.Component {
         } = this.props;
 
         let rows = [];
-        if (pricesBySystem.AMARR.length) {
+        if (pricesBySystem.AMARR && pricesBySystem.AMARR.length) {
             craft.forEach((row, indexRow) => {
                 let costs = [];
 
@@ -76,12 +76,18 @@ class CalcPage extends React.Component {
                         row.inputs.forEach(input => {
                             let tempPrices = [];
                             for (let s in pricesBySystem) {
-                                tempPrices.push({
-                                    name: s,
-                                    cost: (pricesBySystem[s].find(el => el.sell.forQuery.types[0] === input.id).sell.min + taxes[input.tier] * tax/100) * input.count
-                                });
+                                let sellPriceComponent = pricesBySystem[s].find(el => el.sell.forQuery.types[0] === input.id).sell.min;
+
+                                // если цена продажи 0, то его нет в продаже
+                                if (sellPriceComponent !== 0) {
+                                    tempPrices.push({
+                                        name: s,
+                                        cost: (sellPriceComponent + taxes[input.tier] * tax/100) * input.count
+                                    });
+                                }
                             }
 
+                            // находим самое выгодное сочетание
                             let low;
                             tempPrices.forEach(el => {
                                 if (!low || (low.cost > el.cost)) {
@@ -92,8 +98,13 @@ class CalcPage extends React.Component {
                             costSystems.push(low);
                         });
 
+                        // считаем стоимость закупки с учетом налога на импорт
                         let cost = costSystems.reduce((sum, elem) => sum += elem.cost, 0);
+
+                        // считаем стоимость продажи с учетом надлга на экспорт
                         let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === row.result.id).buy.max - taxes[row.result.tier] * tax/100) * row.result.count;
+
+                        // считаем выгоду
                         let profit = max - cost;
 
                         let buySystemNames = costSystems.map(el => el.name);
@@ -109,6 +120,7 @@ class CalcPage extends React.Component {
                     }
                 }
 
+                // находим самый выгодный вариант и получаем список всех положительных крафтов
                 let maxProfitItem;
                 let tableProfits = [];
                 costs.forEach(elem => {
@@ -121,6 +133,7 @@ class CalcPage extends React.Component {
                     }
                 });
 
+                // оставляем только уникальные цепочки
                 let uniqTableProfits = [];
                 tableProfits.forEach(t => {
                     if (!uniqTableProfits.some(el => el.key === t.key)) {
@@ -137,6 +150,7 @@ class CalcPage extends React.Component {
             });
         }
 
+        // сортируем по профиту
         rows.sort((a, b) => {
             return b.maxProfitItem.profit - a.maxProfitItem.profit
         });
