@@ -185,7 +185,7 @@ class CalcPage extends React.Component {
                                         Result
                                     </th>
                                     <th className='column-right'>
-                                        Max price by buy
+                                        $$$
                                     </th>
                                     <th className='column-left'>
                                         System sell
@@ -201,12 +201,8 @@ class CalcPage extends React.Component {
                                     let { cost, max, profit, craftItem } = maxProfitItem;
 
                                     return (
-                                        <React.Fragment>
-                                            <tr
-                                                key={indexRow}
-                                                className={`${expandedRowId === indexRow ? 'invisible' : ''} ${indexRow % 2 === 1 ? 'row-odd' : ''}`}
-                                                onClick={profit > 0 ? () => this.onExpadedRowOn(indexRow) : null}
-                                            >
+                                        <React.Fragment key={indexRow}>
+                                            <tr className={`${uniqTableProfits.length > 1 ? 'expandable' : ''} ${expandedRowId === indexRow ? 'invisible' : ''} ${indexRow % 2 === 1 ? 'row-odd' : ''}`}>
                                                 <td>
                                                     {craftItem.inputs.map(elem =>
                                                         <div key={elem.id}>
@@ -235,6 +231,11 @@ class CalcPage extends React.Component {
                                                 </td>
                                                 <td className='column-right'>
                                                     {profit.toFixed(2)}
+                                                </td>
+                                                <td className='show-row'>
+                                                    <button className='button-show-row' onClick={profit > 0 ? () => this.onExpadedRowOn(indexRow) : null}>
+                                                        show
+                                                    </button>
                                                 </td>
                                             </tr>
                                             {uniqTableProfits.map((uniq, i, list) =>
