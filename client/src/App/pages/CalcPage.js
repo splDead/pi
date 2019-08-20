@@ -218,7 +218,7 @@ class CalcPage extends React.Component {
                                         <React.Fragment key={indexRow}>
                                             <tr
                                                 onClick={profit > 0 ? () => this.onExpadedRowOn(indexRow) : null}
-                                                className={`${uniqTableProfits.length > 1 ? 'expandable' : ''} ${expandedRowId === indexRow ? 'invisible' : ''} ${indexRow % 2 === 1 ? 'row-odd' : ''}`}
+                                                className={`${uniqTableProfits.length > 1 ? 'expandable' : ''} ${expandedRowId === indexRow ? 'invisible' : ''} ${indexRow % 2 === 1 ? 'row-odd' : ''} ${profit < 0 ? 'half-opacity-row' : ''}`}
                                             >
                                                 <td>
                                                     {craftItem.inputs.map(elem =>

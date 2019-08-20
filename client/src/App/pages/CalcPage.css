@@ -62,3 +62,7 @@
 .last td {
     border-bottom: 1px solid #666;
 }
+
+.half-opacity-row {
+    opacity: 0.5;
+}
