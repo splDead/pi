@@ -62,10 +62,3 @@
 .last td {
     border-bottom: 1px solid #666;
 }
-
-.show-row,
-.hide-row {
-    position: absolute;
-    border: none !important;
-    background-color: #fff !important;
-}
