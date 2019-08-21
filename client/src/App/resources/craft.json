@@ -526,5 +526,503 @@
       "tier": 2,
       "name": "Water-Cooled CPU"
     }
+  },
+  {
+    "inputs": [
+      {
+        "id": 3828,
+		"count": 10,
+		"tier": 2,
+		"name": "Construction Blocks"
+      },
+      {
+        "id": 3725,
+		"count": 10,
+		"tier": 2,
+		"name": "Livestock"
+      },
+      {
+        "id": 2463,
+		"count": 10,
+		"tier": 2,
+		"name": "Nanites"
+      }
+    ],
+    "result": {
+      "id": 2358,
+      "count": 3,
+      "tier": 3,
+      "name": "Biotech Research Reports"
+    }
+  },
+  {
+    "inputs": [
+      {
+		"id": 9830,
+		"count": 10,
+		"tier": 2,
+		"name": "Rocket Fuel"
+      },
+      {
+        "id": 3697,
+		"count": 10,
+		"tier": 2,
+		"name": "Silicate Glass"
+      }
+    ],
+    "result": {
+      "id": 2345,
+      "count": 3,
+      "tier": 3,
+      "name": "Camera Drones"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 9832,
+		"count": 10,
+		"tier": 2,
+		"name": "Coolant"
+      },
+      {
+        "id": 2317,
+		"count": 10,
+		"tier": 2,
+		"name": "Oxides"
+      }
+    ],
+    "result": {
+      "id": 2344,
+      "count": 3,
+      "tier": 3,
+      "name": "Condensates"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 3693,
+		"count": 10,
+		"tier": 2,
+		"name": "Fertilizer"
+      },
+      {
+        "id": 3691,
+		"count": 10,
+		"tier": 2,
+		"name": "Synthetic Oil"
+      },
+      {
+        "id": 2319,
+		"count": 10,
+		"tier": 2,
+		"name": "Test Cultures"
+      }
+    ],
+    "result": {
+      "id": 2367,
+      "count": 3,
+      "tier": 3,
+      "name": "Cryoprotectant Solution"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2327,
+		"count": 10,
+		"tier": 2,
+		"name": "Microfiber Shielding"
+      },
+      {
+        "id": 2312,
+		"count": 10,
+		"tier": 2,
+		"name": "Supertensile Plastics"
+      }
+    ],
+    "result": {
+      "id": 17392,
+      "count": 3,
+      "tier": 3,
+      "name": "Data Chips"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2317,
+        "count": 10,
+        "tier": 2,
+        "name": "Oxides"
+      },
+	  {
+        "id": 9838,
+        "count": 10,
+        "tier": 2,
+        "name": "Superconductors"
+      },
+      {
+        "id": 2329,
+        "count": 10,
+        "tier": 2,
+        "name": "Biocells"
+      }
+    ],
+    "result": {
+      "id": 2348,
+      "count": 3,
+      "tier": 3,
+      "name": "Gel-Matrix Biopaste"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 9840,
+        "count": 10,
+        "tier": 2,
+        "name": "Transmitter"
+      },
+      {
+        "id": 2328,
+        "count": 10,
+        "tier": 2,
+        "name": "Water-Cooled CPU"
+      }
+    ],
+    "result": {
+      "id": 9834,
+      "count": 3,
+      "tier": 3,
+      "name": "Guidance Systems"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 3695,
+        "count": 10,
+        "tier": 2,
+        "name": "Polytextiles"
+      },
+      {
+        "id": 9840,
+        "count": 10,
+        "tier": 2,
+        "name": "Transmitter"
+      },
+      {
+        "id": 3775,
+        "count": 10,
+        "tier": 2,
+        "name": "Viral Agent"
+      }
+    ],
+    "result": {
+      "id": 2366,
+      "count": 3,
+      "tier": 3,
+      "name": "Hazmat Detection Systems"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 15317,
+        "count": 10,
+        "tier": 2,
+        "name": "Genetically Enhanced Livestock"
+      },
+      {
+        "id": 2321,
+        "count": 10,
+        "tier": 2,
+        "name": "Polyaramids"
+      }
+    ],
+    "result": {
+      "id": 2361,
+      "count": 3,
+      "tier": 3,
+      "name": "Hermetic Membranes"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2321,
+        "count": 10,
+        "tier": 2,
+        "name": "Polyaramids"
+      },
+      {
+        "id": 9840,
+        "count": 10,
+        "tier": 2,
+        "name": "Transmitter"
+      }
+    ],
+    "result": {
+      "id": 17898,
+      "count": 3,
+      "tier": 3,
+      "name": "High-Tech Transmitters"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 3693,
+		"count": 10,
+		"tier": 2,
+		"name": "Fertilizer"
+      },
+      {
+        "id": 3695,
+        "count": 10,
+        "tier": 2,
+        "name": "Polytextiles"
+      }
+    ],
+    "result": {
+      "id": 2360,
+      "count": 3,
+      "tier": 3,
+      "name": "Industrial Explosives"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2329,
+        "count": 10,
+        "tier": 2,
+        "name": "Biocells"
+      },
+      {
+        "id": 3697,
+		"count": 10,
+		"tier": 2,
+		"name": "Silicate Glass"
+      }
+    ],
+    "result": {
+      "id": 2354,
+      "count": 3,
+      "tier": 3,
+      "name": "Neocoms"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 44,
+        "count": 10,
+        "tier": 2,
+        "name": "Enriched Uranium"
+      },
+      {
+        "id": 2327,
+		"count": 10,
+		"tier": 2,
+		"name": "Microfiber Shielding"
+      }
+    ],
+    "result": {
+      "id": 2352,
+      "count": 3,
+      "tier": 3,
+      "name": "Nuclear Reactors"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 3689,
+        "count": 10,
+        "tier": 2,
+        "name": "Mechanical Parts"
+      },
+      {
+        "id": 9842,
+        "count": 10,
+        "tier": 2,
+        "name": "Miniature Electronics"
+      },
+      {
+        "id": 2312,
+		"count": 10,
+		"tier": 2,
+		"name": "Supertensile Plastics"
+      }
+    ],
+    "result": {
+      "id": 9846,
+      "count": 3,
+      "tier": 3,
+      "name": "Planetary Vehicles"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 9836,
+        "count": 10,
+        "tier": 2,
+        "name": "Consumer Electronics"
+      },
+      {
+        "id": 3689,
+        "count": 10,
+        "tier": 2,
+        "name": "Mechanical Parts"
+      }
+    ],
+    "result": {
+      "id": 9848,
+      "count": 3,
+      "tier": 3,
+      "name": "Robotics"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 3828,
+		"count": 10,
+		"tier": 2,
+		"name": "Construction Blocks"
+      },
+      {
+        "id": 9842,
+        "count": 10,
+        "tier": 2,
+        "name": "Miniature Electronics"
+      }
+    ],
+    "result": {
+      "id": 2351,
+      "count": 3,
+      "tier": 3,
+      "name": "Smartfab Units"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 9836,
+        "count": 10,
+        "tier": 2,
+        "name": "Consumer Electronics"
+      },
+      {
+        "id": 9832,
+		"count": 10,
+		"tier": 2,
+		"name": "Coolant"
+      },
+      {
+        "id": 2328,
+        "count": 10,
+        "tier": 2,
+        "name": "Water-Cooled CPU"
+      }
+    ],
+    "result": {
+      "id": 2349,
+      "count": 3,
+      "tier": 3,
+      "name": "Supercomputers"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2312,
+		"count": 10,
+		"tier": 2,
+		"name": "Supertensile Plastics"
+      },
+      {
+        "id": 2319,
+		"count": 10,
+		"tier": 2,
+		"name": "Test Cultures"
+      }
+    ],
+    "result": {
+      "id": 2346,
+      "count": 3,
+      "tier": 3,
+      "name": "Synthetic Synapses"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 2329,
+        "count": 10,
+        "tier": 2,
+        "name": "Biocells"
+      },
+      {
+        "id": 2463,
+		"count": 10,
+		"tier": 2,
+		"name": "Nanites"
+      }
+    ],
+    "result": {
+      "id": 12836,
+      "count": 3,
+      "tier": 3,
+      "name": "Transcranial Microcontrollers"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 9838,
+        "count": 10,
+        "tier": 2,
+        "name": "Superconductors"
+      },
+      {
+        "id": 3691,
+		"count": 10,
+		"tier": 2,
+		"name": "Synthetic Oil"
+      }
+    ],
+    "result": {
+      "id": 17136,
+      "count": 3,
+      "tier": 3,
+      "name": "Ukomi Superconductors"
+    }
+  },
+  {
+    "inputs": [
+      {
+        "id": 3725,
+		"count": 10,
+		"tier": 2,
+		"name": "Livestock"
+      },
+      {
+        "id": 3775,
+        "count": 10,
+        "tier": 2,
+        "name": "Viral Agent"
+      }
+    ],
+    "result": {
+      "id": 28974,
+      "count": 3,
+      "tier": 3,
+      "name": "Vaccines"
+    }
   }
 ]
