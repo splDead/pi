@@ -263,15 +263,30 @@ class CalcPage extends React.Component {
                             el.buy.forEach(elem => buySystemNames.push(elem))
                         });
 
+                        let cleanedCraftInputs = [];
+                        let cleanedBuySystemNames = [];
+                        craftInputs.forEach((elem, i) => {
+                            if (!cleanedCraftInputs.some(el => el.id === elem.id)) {
+                                cleanedCraftInputs.push(elem);
+                                cleanedBuySystemNames.push(buySystemNames[i]);
+                            } else {
+                                cleanedCraftInputs = cleanedCraftInputs.map(el =>
+                                    el.id === elem.id
+                                        ? ({ ...el, count: el.count + elem.count })
+                                        : el
+                                )
+                            }
+                        });
+
                         costs.push({
-                            buy: buySystemNames,
+                            buy: cleanedBuySystemNames,
                             sell,
                             cost,
                             max,
                             profit,
-                            key: buySystemNames.join('') + sell + profit,
+                            key: cleanedBuySystemNames.join('') + sell + profit,
                             craftItem: {
-                                inputs: craftInputs,
+                                inputs: cleanedCraftInputs,
                                 result: t3.result
                             }
                         });
