@@ -1024,5 +1024,229 @@
       "tier": 3,
       "name": "Vaccines"
     }
+  },
+  {
+	"inputs": [
+      {
+        "id": 17392,
+        "count": 6,
+        "tier": 3,
+        "name": "Data Chips"
+      },
+      {
+        "id": 17898,
+        "count": 6,
+        "tier": 3,
+        "name": "High-Tech Transmitters"
+      },
+	  {
+        "id": 2354,
+        "count": 6,
+        "tier": 3,
+        "name": "Neocoms"
+      }
+    ],
+    "result": {
+      "id": 2867,
+      "count": 1,
+      "tier": 4,
+      "name": "Broadcast Node"
+    }
+  },
+  {
+	"inputs": [
+      {
+        "id": 2348,
+        "count": 6,
+        "tier": 3,
+        "name": "Gel-Matrix Biopaste"
+      },
+      {
+        "id": 2366,
+        "count": 6,
+        "tier": 3,
+        "name": "Hazmat Detection Systems"
+      },
+	  {
+        "id": 9846,
+        "count": 6,
+        "tier": 3,
+        "name": "Planetary Vehicles"
+      }
+    ],
+    "result": {
+      "id": 2868,
+      "count": 1,
+      "tier": 4,
+      "name": "Integrity Response Drones"
+    }
+  },
+  {
+	"inputs": [
+      {
+        "id": 2398,
+        "count": 40,
+        "tier": 1,
+        "name": "Reactive Metals"
+      },
+      {
+        "id": 2360,
+        "count": 6,
+        "tier": 3,
+        "name": "Industrial Explosives"
+      },
+	  {
+        "id": 17136,
+        "count": 6,
+        "tier": 3,
+        "name": "Ukomi Superconductors"
+      }
+    ],
+    "result": {
+      "id": 2869,
+      "count": 1,
+      "tier": 4,
+      "name": "Nano-Factory"
+    }
+  },
+  {
+	"inputs": [
+      {
+        "id": 2393,
+        "count": 40,
+        "tier": 1,
+        "name": "Bacteria"
+      },
+      {
+        "id": 2344,
+        "count": 6,
+        "tier": 3,
+        "name": "Condensates"
+      },
+	  {
+        "id": 9848,
+        "count": 6,
+        "tier": 3,
+        "name": "Robotics"
+      }
+    ],
+    "result": {
+      "id": 2870,
+      "count": 1,
+      "tier": 4,
+      "name": "Organic Mortar Applicators"
+    }
+  },
+  {
+	"inputs": [
+      {
+        "id": 9834,
+        "count": 6,
+        "tier": 3,
+        "name": "Guidance Systems"
+      },
+      {
+        "id": 2346,
+        "count": 6,
+        "tier": 3,
+        "name": "Synthetic Synapses"
+      },
+	  {
+        "id": 12836,
+        "count": 6,
+        "tier": 3,
+        "name": "Transcranial Microcontrollers"
+      }
+    ],
+    "result": {
+      "id": 2871,
+      "count": 1,
+      "tier": 4,
+      "name": "Recursive Computing Module"
+    }
+  },
+  {
+	"inputs": [
+      {
+        "id": 2345,
+        "count": 6,
+        "tier": 3,
+        "name": "Camera Drones"
+      },
+      {
+        "id": 2361,
+        "count": 6,
+        "tier": 3,
+        "name": "Hermetic Membranes"
+      },
+	  {
+        "id": 2352,
+        "count": 6,
+        "tier": 3,
+        "name": "Nuclear Reactors"
+      }
+    ],
+    "result": {
+      "id": 2872,
+      "count": 1,
+      "tier": 4,
+      "name": "Self-Harmonizing Power Core"
+    }
+  },
+  {
+	"inputs": [
+      {
+        "id": 3645,
+        "count": 40,
+        "tier": 1,
+        "name": "Water"
+      },
+      {
+        "id": 2351,
+        "count": 6,
+        "tier": 3,
+        "name": "Smartfab Units"
+      },
+	  {
+        "id": 28974,
+        "count": 6,
+        "tier": 3,
+        "name": "Vaccines"
+      }
+    ],
+    "result": {
+      "id": 2875,
+      "count": 1,
+      "tier": 4,
+      "name": "Sterile Conduits"
+    }
+  },
+  {
+	"inputs": [
+      {
+        "id": 2358,
+        "count": 6,
+        "tier": 3,
+        "name": "Biotech Research Reports"
+      },
+      {
+        "id": 2367,
+        "count": 6,
+        "tier": 3,
+        "name": "Cryoprotectant Solution"
+      },
+	  {
+        "id": 2349,
+        "count": 6,
+        "tier": 3,
+        "name": "Supercomputers"
+      }
+    ],
+    "result": {
+      "id": 2876,
+      "count": 1,
+      "tier": 4,
+      "name": "Wetware Mainframe"
+    }
   }
 ]
