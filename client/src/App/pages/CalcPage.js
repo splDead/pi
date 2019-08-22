@@ -473,7 +473,9 @@ class CalcPage extends React.Component {
                                                 <td>
                                                     {selectBuySystem
                                                         ? selectBuySystem.label
-                                                        : maxProfitItem.buy.map((systemBuy, i) =>
+                                                        : maxProfitItem.buy.every(elem => elem === maxProfitItem.buy[0])
+                                                            ? maxProfitItem.buy[0].substr(0, 1) + maxProfitItem.buy[0].substr(1).toLowerCase()
+                                                            : maxProfitItem.buy.map((systemBuy, i) =>
                                                             <div key={i}>
                                                                 {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
                                                             </div>
@@ -515,7 +517,9 @@ class CalcPage extends React.Component {
                                                     <td>
                                                         {selectBuySystem
                                                             ? selectBuySystem.label
-                                                            : uniq.buy.map((systemBuy, i) =>
+                                                            : uniq.buy.every(elem => elem === uniq.buy[0])
+                                                                ? uniq.buy[0].substr(0, 1) + uniq.buy[0].substr(1).toLowerCase()
+                                                                : uniq.buy.map((systemBuy, i) =>
                                                                 <div key={i}>
                                                                     {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
                                                                 </div>
