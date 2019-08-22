@@ -66,3 +66,10 @@
 .half-opacity-row {
     opacity: 0.5;
 }
+
+.calc-advanced {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}

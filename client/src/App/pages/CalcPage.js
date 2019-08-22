@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Select from 'react-select';
 import MainMenu from '../components/MainMenu';
 import TabButton from '../components/TabButton';
+import Checkbox from '../components/Checkbox';
 
 import * as a from '../actions/calc';
 
@@ -22,19 +24,30 @@ const taxes = {
     4: 1200000
 };
 
+const styles = {
+    container: styles => ({
+        ...styles,
+        minWidth: 200
+    })
+};
+
+
 class CalcPage extends React.Component {
 
     state = {
         activeTab: tabs.CALC,
         expandedRowId: '',
-        isT1toT3: false
+        isT1toT3: false,
+        systemIds: [],
+        selectBuySystem: ''
     };
 
     componentDidMount() {
         axios.post('/api/getSystemIds')
-            .then(response =>
-                this.props.loadPricesBySystems(response.data)
-            );
+            .then(response => {
+                this.setState({ systemIds: response.data });
+                this.props.loadPricesBySystems(response.data);
+            });
     }
 
     onChangeTabs = activeTab => {
@@ -54,7 +67,11 @@ class CalcPage extends React.Component {
     };
 
     onChangeT1T3CraftMode = () => {
-        this.setState({ isT1toT3: !this.state.isT1toT3 });
+        this.setState({ isT1toT3: !this.state.isT1toT3, expandedRowId: '' });
+    };
+
+    onChangeBuySystem = selectBuySystem => {
+        this.setState({ selectBuySystem, expandedRowId: '' });
     };
 
     render() {
@@ -62,7 +79,9 @@ class CalcPage extends React.Component {
         const {
             activeTab,
             expandedRowId,
-            isT1toT3
+            isT1toT3,
+            systemIds,
+            selectBuySystem
         } = this.state;
 
         const {
@@ -72,10 +91,13 @@ class CalcPage extends React.Component {
         } = this.props;
 
         let rows = [];
+
+        // проверяем загрузку цен
         if (pricesBySystem.AMARR && pricesBySystem.AMARR.length) {
             craft.forEach((row, indexRow) => {
                 let costs = [];
 
+                // собираем все варианты закупок
                 for (let buy in pricesBySystem) {
                     for (let sell in pricesBySystem) {
                         let costSystems = [];
@@ -95,66 +117,82 @@ class CalcPage extends React.Component {
 
                             // находим самое выгодное сочетание
                             let low;
-                            tempPrices.forEach(el => {
-                                if (!low || (low.cost > el.cost)) {
-                                    low = el;
-                                }
+
+                            // если выбрана система закупки, игнорируем самое выгодное предложение
+                            if (selectBuySystem) {
+                                low = tempPrices.find(elem => elem.name === selectBuySystem.label.toUpperCase());
+                            } else {
+                                tempPrices.forEach(el => {
+                                    if (!low || (low.cost > el.cost)) {
+                                        low = el;
+                                    }
+                                });
+                            }
+
+                            // если компонент крафта не найден в системе закупки делаем ретурн
+                            if (low) {
+                                costSystems.push(low);
+                            }
+                        });
+
+                        if (costSystems.length === row.inputs.length) {
+                            // считаем стоимость закупки с учетом налога на импорт
+                            let cost = costSystems.reduce((sum, elem) => sum += elem.cost, 0);
+
+                            // считаем стоимость продажи с учетом надлга на экспорт
+                            let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === row.result.id).buy.max - taxes[row.result.tier] * tax/100) * row.result.count;
+
+                            // считаем выгоду
+                            let profit = max - cost;
+
+                            let buySystemNames = costSystems.map(el => el.name);
+                            costs.push({
+                                buy: buySystemNames,
+                                sell,
+                                cost,
+                                max,
+                                profit,
+                                key: buySystemNames.join('') + sell + profit,
+                                craftItem: row
                             });
-
-                            costSystems.push(low);
-                        });
-
-                        // считаем стоимость закупки с учетом налога на импорт
-                        let cost = costSystems.reduce((sum, elem) => sum += elem.cost, 0);
-
-                        // считаем стоимость продажи с учетом надлга на экспорт
-                        let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === row.result.id).buy.max - taxes[row.result.tier] * tax/100) * row.result.count;
-
-                        // считаем выгоду
-                        let profit = max - cost;
-
-                        let buySystemNames = costSystems.map(el => el.name);
-                        costs.push({
-                            buy: buySystemNames,
-                            sell,
-                            cost,
-                            max,
-                            profit,
-                            key: buySystemNames.join('') + sell + profit,
-                            craftItem: row
-                        });
+                        }
                     }
                 }
 
-                // находим самый выгодный вариант и получаем список всех положительных крафтов
-                let maxProfitItem;
-                let tableProfits = [];
-                costs.forEach(elem => {
-                    if (!maxProfitItem || (maxProfitItem.profit < elem.profit)) {
-                        maxProfitItem = elem;
-                    }
+                // проверяем что закупка возможна
+                if (costs.length > 0) {
+                    // находим самый выгодный вариант и получаем список всех положительных крафтов
+                    let maxProfitItem;
+                    let tableProfits = [];
 
-                    if (elem.profit > 0) {
-                        tableProfits.push(elem);
-                    }
-                });
+                    costs.forEach(elem => {
+                        if (!maxProfitItem || (maxProfitItem.profit < elem.profit)) {
+                            maxProfitItem = elem;
+                        }
 
-                // оставляем только уникальные цепочки
-                let uniqTableProfits = [];
-                tableProfits.forEach(t => {
-                    if (!uniqTableProfits.some(el => el.key === t.key)) {
-                        uniqTableProfits.push(t);
-                    }
-                });
+                        if (elem.profit > 0) {
+                            tableProfits.push(elem);
+                        }
+                    });
 
-                uniqTableProfits.sort((a, b) => b.profit - a.profit);
+                    // оставляем только уникальные цепочки
+                    let uniqTableProfits = [];
+                    tableProfits.forEach(t => {
+                        if (!uniqTableProfits.some(el => el.key === t.key)) {
+                            uniqTableProfits.push(t);
+                        }
+                    });
 
-                rows.push({
-                    maxProfitItem,
-                    uniqTableProfits
-                });
+                    uniqTableProfits.sort((a, b) => b.profit - a.profit);
+
+                    rows.push({
+                        maxProfitItem,
+                        uniqTableProfits
+                    });
+                }
             });
 
+            // проверяем необходимость считать крафт из т1 в т3
             if (isT1toT3) {
                 let craftT3 = craft.filter(el => el.result.tier === 3);
                 let craftT2 = craft.filter(el => el.result.tier === 2);
@@ -193,43 +231,131 @@ class CalcPage extends React.Component {
 
                                     // находим самое выгодное сочетание
                                     let low;
-                                    tempPrices.forEach(el => {
-                                        if (!low || (low.cost > el.cost)) {
-                                            low = el;
-                                        }
+
+                                    if (selectBuySystem) {
+                                        low = tempPrices.find(elem => elem.name === selectBuySystem.label.toUpperCase());
+                                    } else {
+                                        tempPrices.forEach(el => {
+                                            if (!low || (low.cost > el.cost)) {
+                                                low = el;
+                                            }
+                                        });
+                                    }
+
+                                    if (low) {
+                                        costSystems.push(low);
+                                    }
+                                });
+
+                                if (costSystems.length === tempCraftT2.inputs.length) {
+                                    // считаем стоимость закупки с учетом налога на импорт
+                                    let cost = costSystems.reduce((sum, elem) => sum += elem.cost, 0);
+
+                                    let buySystemNames = costSystems.map(el => el.name);
+                                    tempT2res.push({
+                                        buy: buySystemNames,
+                                        cost,
+                                        key: buySystemNames.join('') + cost,
+                                        craftItem: t2input,
+                                        sourceItems: costSystems.map(el => ({
+                                            name: el.inputName,
+                                            count: el.inputCount,
+                                            id: el.inputId,
+                                            tier: el.inputTier
+                                        }))
                                     });
-
-                                    costSystems.push(low);
-                                });
-
-                                // считаем стоимость закупки с учетом налога на импорт
-                                let cost = costSystems.reduce((sum, elem) => sum += elem.cost, 0);
-
-                                let buySystemNames = costSystems.map(el => el.name);
-                                tempT2res.push({
-                                    buy: buySystemNames,
-                                    cost,
-                                    key: buySystemNames.join('') + cost,
-                                    craftItem: t2input,
-                                    sourceItems: costSystems.map(el => ({
-                                        name: el.inputName,
-                                        count: el.inputCount,
-                                        id: el.inputId,
-                                        tier: el.inputTier
-                                    }))
-                                });
+                                }
                             }
                         }
 
+                        // проверяем что закупка возможна
+                        if (tempT2res.length > 0) {
+                            // находим самый выгодный вариант и получаем список всех положительных крафтов
+                            let maxProfitItem;
+                            let tableProfits = [];
+                            tempT2res.forEach(elem => {
+                                if (!maxProfitItem || (maxProfitItem.cost < elem.cost)) {
+                                    maxProfitItem = elem;
+                                }
+
+                                if (!tableProfits.some(el => el.cost === elem.cost)) {
+                                    tableProfits.push(elem);
+                                }
+                            });
+
+                            // оставляем только уникальные цепочки
+                            let uniqTableProfits = [];
+                            tableProfits.forEach(t => {
+                                if (!uniqTableProfits.some(el => el.key === t.key)) {
+                                    uniqTableProfits.push(t);
+                                }
+                            });
+
+                            uniqTableProfits.sort((a, b) => b.profit - a.profit);
+
+                            tempT3res.push(maxProfitItem);
+                        }
+                    });
+
+                    // проверяем что удалось закупить все компонеты
+                    if (tempT3res.length === t3.inputs.length) {
+                        for (let sell in pricesBySystem) {
+                            // считаем стоимость продажи с учетом надлга на экспорт
+                            let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === t3.result.id).buy.max - taxes[t3.result.tier] * tax/100) * t3.result.count;
+
+                            let cost = tempT3res.reduce((sum, el) => sum += el.cost, 0);
+
+                            // считаем выгоду
+                            let profit = max - cost;
+
+                            let buySystemNames = [];
+                            let craftInputs = [];
+                            tempT3res.forEach(el => {
+                                craftInputs = craftInputs.concat(el.sourceItems);
+                                el.buy.forEach(elem => buySystemNames.push(elem))
+                            });
+
+                            let cleanedCraftInputs = [];
+                            let cleanedBuySystemNames = [];
+                            craftInputs.forEach((elem, i) => {
+                                if (!cleanedCraftInputs.some(el => el.id === elem.id)) {
+                                    cleanedCraftInputs.push(elem);
+                                    cleanedBuySystemNames.push(buySystemNames[i]);
+                                } else {
+                                    cleanedCraftInputs = cleanedCraftInputs.map(el =>
+                                        el.id === elem.id
+                                            ? ({ ...el, count: el.count + elem.count })
+                                            : el
+                                    )
+                                }
+                            });
+
+                            costs.push({
+                                buy: cleanedBuySystemNames,
+                                sell,
+                                cost,
+                                max,
+                                profit,
+                                key: cleanedBuySystemNames.join('') + sell + profit,
+                                craftItem: {
+                                    inputs: cleanedCraftInputs,
+                                    result: t3.result
+                                }
+                            });
+                        }
+                    }
+
+                    // проверяем возможность закупки
+                    if (costs.length > 0) {
                         // находим самый выгодный вариант и получаем список всех положительных крафтов
                         let maxProfitItem;
                         let tableProfits = [];
-                        tempT2res.forEach(elem => {
-                            if (!maxProfitItem || (maxProfitItem.cost < elem.cost)) {
+                        costs.forEach(elem => {
+                            if (!maxProfitItem || (maxProfitItem.profit < elem.profit)) {
                                 maxProfitItem = elem;
                             }
 
-                            if (!tableProfits.some(el => el.cost === elem.cost)) {
+                            if (elem.profit > 0) {
                                 tableProfits.push(elem);
                             }
                         });
@@ -244,81 +370,11 @@ class CalcPage extends React.Component {
 
                         uniqTableProfits.sort((a, b) => b.profit - a.profit);
 
-                        tempT3res.push(maxProfitItem);
-                    });
-
-                    for (let sell in pricesBySystem) {
-                        // считаем стоимость продажи с учетом надлга на экспорт
-                        let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === t3.result.id).buy.max - taxes[t3.result.tier] * tax/100) * t3.result.count;
-
-                        let cost = tempT3res.reduce((sum, el) => sum += el.cost, 0);
-
-                        // считаем выгоду
-                        let profit = max - cost;
-
-                        let buySystemNames = [];
-                        let craftInputs = [];
-                        tempT3res.forEach(el => {
-                            craftInputs = craftInputs.concat(el.sourceItems);
-                            el.buy.forEach(elem => buySystemNames.push(elem))
-                        });
-
-                        let cleanedCraftInputs = [];
-                        let cleanedBuySystemNames = [];
-                        craftInputs.forEach((elem, i) => {
-                            if (!cleanedCraftInputs.some(el => el.id === elem.id)) {
-                                cleanedCraftInputs.push(elem);
-                                cleanedBuySystemNames.push(buySystemNames[i]);
-                            } else {
-                                cleanedCraftInputs = cleanedCraftInputs.map(el =>
-                                    el.id === elem.id
-                                        ? ({ ...el, count: el.count + elem.count })
-                                        : el
-                                )
-                            }
-                        });
-
-                        costs.push({
-                            buy: cleanedBuySystemNames,
-                            sell,
-                            cost,
-                            max,
-                            profit,
-                            key: cleanedBuySystemNames.join('') + sell + profit,
-                            craftItem: {
-                                inputs: cleanedCraftInputs,
-                                result: t3.result
-                            }
+                        rows.push({
+                            maxProfitItem,
+                            uniqTableProfits
                         });
                     }
-
-                    // находим самый выгодный вариант и получаем список всех положительных крафтов
-                    let maxProfitItem;
-                    let tableProfits = [];
-                    costs.forEach(elem => {
-                        if (!maxProfitItem || (maxProfitItem.profit < elem.profit)) {
-                            maxProfitItem = elem;
-                        }
-
-                        if (elem.profit > 0) {
-                            tableProfits.push(elem);
-                        }
-                    });
-
-                    // оставляем только уникальные цепочки
-                    let uniqTableProfits = [];
-                    tableProfits.forEach(t => {
-                        if (!uniqTableProfits.some(el => el.key === t.key)) {
-                            uniqTableProfits.push(t);
-                        }
-                    });
-
-                    uniqTableProfits.sort((a, b) => b.profit - a.profit);
-
-                    rows.push({
-                        maxProfitItem,
-                        uniqTableProfits
-                    });
                 });
             }
         }
@@ -355,14 +411,18 @@ class CalcPage extends React.Component {
                             : null
                         }
                         <div className='calc-advanced'>
-                            <label>
-                                T1 -> T3
-                                <input
-                                    type='checkbox'
-                                    checked={this.state.isT1toT3}
-                                    onChange={this.onChangeT1T3CraftMode}
-                                />
-                            </label>
+                            <Checkbox
+                                title='T1 -> T3'
+                                checked={isT1toT3}
+                                onChange={this.onChangeT1T3CraftMode}
+                            />
+                            <Select
+                                isClearable={true}
+                                placeholder='Select buy system'
+                                value={selectBuySystem}
+                                onChange={this.onChangeBuySystem}
+                                styles={styles}
+                                options={systemIds} />
                         </div>
                     </div>
                     {activeTab === tabs.CALC
@@ -411,11 +471,14 @@ class CalcPage extends React.Component {
                                                     )}
                                                 </td>
                                                 <td>
-                                                    {maxProfitItem.buy.map((systemBuy, i) =>
-                                                        <div key={i}>
-                                                            {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
-                                                        </div>
-                                                    )}
+                                                    {selectBuySystem
+                                                        ? selectBuySystem.label
+                                                        : maxProfitItem.buy.map((systemBuy, i) =>
+                                                            <div key={i}>
+                                                                {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
+                                                            </div>
+                                                        )
+                                                    }
                                                 </td>
                                                 <td>
                                                     {cost.toFixed(2)}
@@ -450,11 +513,14 @@ class CalcPage extends React.Component {
                                                         )}
                                                     </td>
                                                     <td>
-                                                        {uniq.buy.map((systemBuy, i) =>
-                                                            <div key={i}>
-                                                                {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
-                                                            </div>
-                                                        )}
+                                                        {selectBuySystem
+                                                            ? selectBuySystem.label
+                                                            : uniq.buy.map((systemBuy, i) =>
+                                                                <div key={i}>
+                                                                    {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
+                                                                </div>
+                                                            )
+                                                        }
                                                     </td>
                                                     <td>
                                                         {uniq.cost.toFixed(2)}
