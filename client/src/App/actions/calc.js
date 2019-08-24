@@ -26,6 +26,9 @@ export const loadPricesBySystems = systems => dispatch => {
                 systems: response
             })
         })
+        .catch(err => {
+            console.error(err.message);
+        })
 };
 
 export const changeTax = tax => ({

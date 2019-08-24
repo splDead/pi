@@ -9,8 +9,13 @@ module.exports = (express) => {
             evemarketer(req.body.systemId)
                 .then(response => {
                     res.json(response);
-                }
-            );
+                })
+                .catch(err => {
+                    console.error(err.message);
+                    res.status(err.statusCode).json({
+                        message: err.message
+                    });
+                })
     });
 
     router.route('/getSystemIds')
