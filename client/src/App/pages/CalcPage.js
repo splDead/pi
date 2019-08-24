@@ -145,7 +145,7 @@ class CalcPage extends React.Component {
                             // считаем стоимость закупки с учетом налога на импорт
                             let cost = costSystems.reduce((sum, elem) => sum += elem.cost, 0);
 
-                            // считаем стоимость продажи с учетом надлга на экспорт
+                            // считаем стоимость продажи с учетом налога на экспорт
                             let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === row.result.id).buy.max - taxes[row.result.tier] * tax/100) * row.result.count;
 
                             // считаем выгоду
@@ -306,7 +306,7 @@ class CalcPage extends React.Component {
                     // проверяем что удалось закупить все компонеты
                     if (tempT3res.length === t3.inputs.length) {
                         for (let sell in pricesBySystem) {
-                            // считаем стоимость продажи с учетом надлга на экспорт
+                            // считаем стоимость продажи с учетом налога на экспорт
                             let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === t3.result.id).buy.max - taxes[t3.result.tier] * tax/100) * t3.result.count;
 
                             let cost = tempT3res.reduce((sum, el) => sum += el.cost, 0);
@@ -550,7 +550,7 @@ class CalcPage extends React.Component {
                     // проверяем что удалось закупить все компонеты
                     if (tempT4res.length === t4.inputs.length) {
                         for (let sell in pricesBySystem) {
-                            // считаем стоимость продажи с учетом надлга на экспорт
+                            // считаем стоимость продажи с учетом налога на экспорт
                             let max = (pricesBySystem[sell].find(el => el.buy.forQuery.types[0] === t4.result.id).buy.max - taxes[t4.result.tier] * tax/100) * t4.result.count;
 
                             let cost = tempT4res.reduce((sum, el) => sum += el.cost, 0);
