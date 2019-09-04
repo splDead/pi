@@ -1,14 +1,31 @@
+:root {
+    --main-color: #00AEFF;
+}
+
 body {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
+    background-color: #101010;
+    color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
 .layout {
-  max-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .page__container {
-  padding: 0 10px;
+    padding: 0 10px;
+}
+
+.select-reuse__control--is-focused {
+    border-color: var(--main-color) !important;
+    box-shadow: none !important;
+}
+
+.select-reuse__option--is-focused {
+    background-color: transparent !important;
+    color: var(--main-color) !important;
 }

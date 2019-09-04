@@ -36,6 +36,27 @@ const styles = {
     container: styles => ({
         ...styles,
         width: '100%'
+    }),
+    control: styles => ({
+        ...styles,
+        background: 'transparent'
+    }),
+    menuList: styles => ({
+        ...styles,
+        background: 'rgba(34, 34, 34, 0.8)',
+        boxShadow: '0 0 -5px -10px var(--main-color)'
+    }),
+    option: styles => ({
+        ...styles,
+        cursor: 'pointer'
+    }),
+    input: styles => ({
+        ...styles,
+        color: 'white'
+    }),
+    singleValue: styles => ({
+        ...styles,
+        color: 'white'
     })
 };
 
@@ -94,6 +115,7 @@ class LoadingForm extends React.Component {
         return (
             <div className='loading-container'>
                 <Select
+                    classNamePrefix='select-reuse'
                     placeholder='Select system'
                     value={system}
                     onChange={this.handleChangeSystemId}
@@ -101,7 +123,7 @@ class LoadingForm extends React.Component {
                     options={systemIds} />
                 <div className='button-container'>
                     <button className='button' onClick={this.handleGenerate}>
-                        Generate XLSX
+                        <span>Generate XLSX</span>
                     </button>
                 </div>
             </div>

@@ -3,13 +3,23 @@
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: #fff;
     transition: all 0.25s;
-    display: inline-flex;
 }
 
-.tab-button.active {
-    background-color: rgba(0, 0, 0, 0.05);
+.tab-button-bar {
+    border-top: 1px solid var(--main-color);
+    margin: -7px 0 6px 0;
+    width: 0;
+}
+
+.tab-button-title {
+
+}
+
+.tab-button:hover .tab-button-bar,
+.tab-button.active .tab-button-bar {
+    width: 100%;
+    transition: all .15s ease-in-out;
 }
 
 .tab-button:hover {

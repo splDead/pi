@@ -1,25 +1,34 @@
+.navigation {
+    padding: 30px 20px;
+    border-bottom: 1px solid #455057;
+    margin-bottom: 30px;
+}
+
 .main-menu__container {
-    margin: 0;
-    list-style: none;
-    padding: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
 }
 
 .main-menu__item {
-    display: inline-block;
-    padding: 10px 20px;
-    transition: all 0.25s;
+    font-weight: 400;
+    font-size: 14px;
 }
 
-.main-menu__link.active .main-menu__item {
-    background-color: rgba(0, 0, 0, 0.05)
+.main-menu__item-bar {
+    border-top: 1px solid var(--main-color);
+    margin: -7px 0 6px -1px;
+    width: 0;
 }
 
-.main-menu__item:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.main-menu__link.active .main-menu__item-bar,
+.main-menu__link:hover .main-menu__item-bar {
+    width: 100%;
+    transition: all .15s ease-in-out;
 }
 
 .main-menu__link {
     text-decoration: none;
-    color: #666;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    margin: 0 10px;
 }

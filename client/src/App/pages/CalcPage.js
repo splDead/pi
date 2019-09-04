@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Select from 'react-select';
-import MainMenu from '../components/MainMenu';
 import TabButton from '../components/TabButton';
 import Checkbox from '../components/Checkbox';
+import Border from '../components/Border';
+import Input from '../components/Input';
 
 import * as a from '../actions/calc';
 
@@ -28,6 +29,27 @@ const styles = {
     container: styles => ({
         ...styles,
         minWidth: 200
+    }),
+    control: styles => ({
+        ...styles,
+        background: 'transparent'
+    }),
+    menuList: styles => ({
+        ...styles,
+        background: 'rgba(34, 34, 34, 0.8)',
+        boxShadow: '0 0 -5px -10px var(--main-color)'
+    }),
+    option: styles => ({
+        ...styles,
+        cursor: 'pointer'
+    }),
+    input: styles => ({
+        ...styles,
+        color: 'white'
+    }),
+    singleValue: styles => ({
+        ...styles,
+        color: 'white'
     })
 };
 
@@ -99,7 +121,6 @@ class CalcPage extends React.Component {
         const {
             tax,
             pricesBySystem,
-            match
         } = this.props;
 
         let rows = [];
@@ -858,7 +879,6 @@ class CalcPage extends React.Component {
 
         return (
             <React.Fragment>
-                <MainMenu match={match} />
                 <div className='page__container'>
                     <div className='calc-header'>
                         <div className='calc-tabs'>
@@ -874,12 +894,7 @@ class CalcPage extends React.Component {
                             />
                         </div>
                         {activeTab === tabs.CALC
-                            ? <div className='tax__container'>
-                                <label>
-                                    <div>Сustoms tax: </div>
-                                    <input type='text' value={tax} onChange={this.onChangeTax}/>
-                                </label>
-                            </div>
+                            ? <Input title='Сustoms tax:' value={tax} onChange={this.onChangeTax} />
                             : null
                         }
                         <div className='calc-advanced'>
@@ -899,6 +914,7 @@ class CalcPage extends React.Component {
                                 onChange={this.onChangeT2T4CraftMode}
                             />
                             <Select
+                                classNamePrefix='select-reuse'
                                 isClearable={true}
                                 placeholder='Select buy system'
                                 value={selectBuySystem}
@@ -907,6 +923,7 @@ class CalcPage extends React.Component {
                                 options={systemIds} />
                         </div>
                     </div>
+                    <Border header='Craft chains' />
                     {activeTab === tabs.CALC
                         ? <table className='calc-table'>
                             <thead>
@@ -942,7 +959,7 @@ class CalcPage extends React.Component {
                                     return (
                                         <React.Fragment key={indexRow}>
                                             <tr
-                                                onClick={profit > 0 ? () => this.onExpadedRowOn(indexRow) : null}
+                                                onClick={profit > 0 && uniqTableProfits.length > 1 ? () => this.onExpadedRowOn(indexRow) : null}
                                                 className={`${uniqTableProfits.length > 1 ? 'expandable' : ''} ${expandedRowId === indexRow ? 'invisible' : ''} ${indexRow % 2 === 1 ? 'row-odd' : ''} ${profit < 0 ? 'half-opacity-row' : ''}`}
                                             >
                                                 <td>
@@ -984,7 +1001,7 @@ class CalcPage extends React.Component {
                                                     {profit.toFixed(2)}
                                                 </td>
                                             </tr>
-                                            {uniqTableProfits.map((uniq, i, list) =>
+                                            {uniqTableProfits.length > 1 && uniqTableProfits.map((uniq, i, list) =>
                                                 <tr
                                                     onClick={this.onExpandedRowOff}
                                                     key={uniq.key} className={`${expandedRowId !== indexRow || expandedRowId === '' ? 'invisible' : ''} ${i === 0 ? 'first' : ''} ${i === list.length - 1 ? 'last' : ''}`}

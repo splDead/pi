@@ -2,10 +2,12 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    min-height: 60px;
 }
 
 .calc-tabs {
     margin: 10px 20px 10px 0;
+    display: flex;
 }
 
 .tax__container {
@@ -32,6 +34,8 @@
     height: 40px;
     box-sizing: border-box;
     font-size: inherit;
+    background-color: transparent;
+    color: white;
 }
 
 .tax__container label input:hover {

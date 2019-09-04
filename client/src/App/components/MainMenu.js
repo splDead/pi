@@ -1,29 +1,22 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import './MainMenu.css';
 
-export default ({ match }) => {
-
-    const onClick = e => {
-        if (e.currentTarget.className.includes('active')) {
-            e.preventDefault();
-            return;
-        }
-    };
-
-    return (
-        <ul className='main-menu__container'>
-            <a className={`main-menu__link ${match.path === '/' ? 'active' : ''}`} href="/" onClick={onClick}>
-                <li className='main-menu__item'>
+export default () =>
+    <div className='navigation'>
+        <div className='main-menu__container'>
+            <NavLink className='main-menu__link' to='/' exact>
+                <div className='main-menu__item-bar'/>
+                <div className='main-menu__item'>
                     Main
-                </li>
-            </a>
-            <a className={`main-menu__link ${match.path === '/calc' ? 'active' : ''}`} href="/calc" onClick={onClick}>
-                <li className='main-menu__item'>
+                </div>
+            </NavLink>
+            <NavLink className='main-menu__link' to='/calc'>
+                <div className='main-menu__item-bar'/>
+                <div className='main-menu__item'>
                     Calc
-                </li>
-            </a>
-        </ul>
-    )
-}
-    ;
+                </div>
+            </NavLink>
+        </div>
+    </div>;
