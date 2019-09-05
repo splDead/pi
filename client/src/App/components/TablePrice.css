@@ -1,5 +1,14 @@
+.tables__scroll-container {
+    position: relative;
+    overflow: hidden;
+    height: calc(100vh - 107px - 48px);
+}
+
 .tables__container {
     padding: 0 10px;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 th {
