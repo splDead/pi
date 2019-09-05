@@ -6,6 +6,7 @@ import TabButton from '../components/TabButton';
 import Checkbox from '../components/Checkbox';
 import Border from '../components/Border';
 import Input from '../components/Input';
+import FixedPosition from '../components/FixedPosition';
 
 import * as a from '../actions/calc';
 
@@ -877,134 +878,95 @@ class CalcPage extends React.Component {
             return b.maxProfitItem.profit - a.maxProfitItem.profit
         });
 
+        const FixedComponent = () =>
+            <React.Fragment>
+                <div className='calc-header'>
+                    <div className='calc-tabs'>
+                        <TabButton
+                            onClick={() => this.onChangeTabs(tabs.CALC)}
+                            title='Calculator'
+                            active={activeTab === tabs.CALC}
+                        />
+                        <TabButton
+                            onClick={() => this.onChangeTabs(tabs.STORAGE)}
+                            title='Storage'
+                            active={activeTab === tabs.STORAGE}
+                        />
+                    </div>
+                    {activeTab === tabs.CALC
+                        ? <Input title='Сustoms tax:' value={tax} onChange={this.onChangeTax} />
+                        : null
+                    }
+                    <div className='calc-advanced'>
+                        <Checkbox
+                            title='T1 -> T3'
+                            checked={isT1toT3}
+                            onChange={this.onChangeT1T3CraftMode}
+                        />
+                        <Checkbox
+                            title='T1 -> T4'
+                            checked={isT1toT4}
+                            onChange={this.onChangeT1T4CraftMode}
+                        />
+                        <Checkbox
+                            title='T2 -> T4'
+                            checked={isT2toT4}
+                            onChange={this.onChangeT2T4CraftMode}
+                        />
+                        <Select
+                            classNamePrefix='select-reuse'
+                            isClearable={true}
+                            placeholder='Select buy system'
+                            value={selectBuySystem}
+                            onChange={this.onChangeBuySystem}
+                            styles={styles}
+                            options={systemIds} />
+                    </div>
+                </div>
+                <Border header='Craft chains' />
+            </React.Fragment>;
+
         return (
             <React.Fragment>
                 <div className='page__container'>
-                    <div className='calc-header'>
-                        <div className='calc-tabs'>
-                            <TabButton
-                                onClick={() => this.onChangeTabs(tabs.CALC)}
-                                title='Calculator'
-                                active={activeTab === tabs.CALC}
-                            />
-                            <TabButton
-                                onClick={() => this.onChangeTabs(tabs.STORAGE)}
-                                title='Storage'
-                                active={activeTab === tabs.STORAGE}
-                            />
-                        </div>
+                    <FixedPosition Component={FixedComponent}>
                         {activeTab === tabs.CALC
-                            ? <Input title='Сustoms tax:' value={tax} onChange={this.onChangeTax} />
-                            : null
-                        }
-                        <div className='calc-advanced'>
-                            <Checkbox
-                                title='T1 -> T3'
-                                checked={isT1toT3}
-                                onChange={this.onChangeT1T3CraftMode}
-                            />
-                            <Checkbox
-                                title='T1 -> T4'
-                                checked={isT1toT4}
-                                onChange={this.onChangeT1T4CraftMode}
-                            />
-                            <Checkbox
-                                title='T2 -> T4'
-                                checked={isT2toT4}
-                                onChange={this.onChangeT2T4CraftMode}
-                            />
-                            <Select
-                                classNamePrefix='select-reuse'
-                                isClearable={true}
-                                placeholder='Select buy system'
-                                value={selectBuySystem}
-                                onChange={this.onChangeBuySystem}
-                                styles={styles}
-                                options={systemIds} />
-                        </div>
-                    </div>
-                    <Border header='Craft chains' />
-                    {activeTab === tabs.CALC
-                        ? <table className='calc-table'>
-                            <thead>
-                                <tr>
-                                    <th className='column-left'>
-                                        Inputs
-                                    </th>
-                                    <th className='column-left'>
-                                        System buy
-                                    </th>
-                                    <th className='column-left'>
-                                        Cost
-                                    </th>
-                                    <th className='column-left'>
-                                        Result
-                                    </th>
-                                    <th className='column-right'>
-                                        $$$
-                                    </th>
-                                    <th className='column-left'>
-                                        System sell
-                                    </th>
-                                    <th className='column-right'>
-                                        Profit
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {rows.length > 0 && rows.map((row, indexRow) => {
-                                    let { maxProfitItem, uniqTableProfits } = row;
-                                    let { cost, max, profit, craftItem } = maxProfitItem;
+                            ? <table className='calc-table'>
+                                <thead>
+                                    <tr>
+                                        <th className='column-left'>
+                                            Inputs
+                                        </th>
+                                        <th className='column-left'>
+                                            System buy
+                                        </th>
+                                        <th className='column-left'>
+                                            Cost
+                                        </th>
+                                        <th className='column-left'>
+                                            Result
+                                        </th>
+                                        <th className='column-right'>
+                                            $$$
+                                        </th>
+                                        <th className='column-left'>
+                                            System sell
+                                        </th>
+                                        <th className='column-right'>
+                                            Profit
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rows.length > 0 && rows.map((row, indexRow) => {
+                                        let { maxProfitItem, uniqTableProfits } = row;
+                                        let { cost, max, profit, craftItem } = maxProfitItem;
 
-                                    return (
-                                        <React.Fragment key={indexRow}>
-                                            <tr
-                                                onClick={profit > 0 && uniqTableProfits.length > 1 ? () => this.onExpadedRowOn(indexRow) : null}
-                                                className={`${uniqTableProfits.length > 1 ? 'expandable' : ''} ${expandedRowId === indexRow ? 'invisible' : ''} ${indexRow % 2 === 1 ? 'row-odd' : ''} ${profit < 0 ? 'half-opacity-row' : ''}`}
-                                            >
-                                                <td>
-                                                    {craftItem.inputs.map(elem =>
-                                                        <div key={elem.id}>
-                                                            {elem.name} x {elem.count}
-                                                        </div>
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {selectBuySystem
-                                                        ? selectBuySystem.label
-                                                        : maxProfitItem.buy.every(elem => elem === maxProfitItem.buy[0])
-                                                            ? maxProfitItem.buy[0].substr(0, 1) + maxProfitItem.buy[0].substr(1).toLowerCase()
-                                                            : maxProfitItem.buy.map((systemBuy, i) =>
-                                                            <div key={i}>
-                                                                {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
-                                                            </div>
-                                                        )
-                                                    }
-                                                </td>
-                                                <td>
-                                                    {cost.toFixed(2)}
-                                                </td>
-                                                <td>
-                                                    {craftItem.result.name} x {craftItem.result.count}
-                                                </td>
-                                                <td className='column-right'>
-                                                    {max.toFixed(2)}
-                                                </td>
-                                                <td>
-                                                    {maxProfitItem.sell.substr(0, 1) + maxProfitItem.sell.substr(1).toLowerCase()}
-                                                    {uniqTableProfits.length > 1
-                                                        ? ` + ${uniqTableProfits.length - 1}`
-                                                        : null
-                                                    }
-                                                </td>
-                                                <td className='column-right'>
-                                                    {profit.toFixed(2)}
-                                                </td>
-                                            </tr>
-                                            {uniqTableProfits.length > 1 && uniqTableProfits.map((uniq, i, list) =>
+                                        return (
+                                            <React.Fragment key={indexRow}>
                                                 <tr
-                                                    onClick={this.onExpandedRowOff}
-                                                    key={uniq.key} className={`${expandedRowId !== indexRow || expandedRowId === '' ? 'invisible' : ''} ${i === 0 ? 'first' : ''} ${i === list.length - 1 ? 'last' : ''}`}
+                                                    onClick={profit > 0 && uniqTableProfits.length > 1 ? () => this.onExpadedRowOn(indexRow) : null}
+                                                    className={`${uniqTableProfits.length > 1 ? 'expandable' : ''} ${expandedRowId === indexRow ? 'invisible' : ''} ${indexRow % 2 === 1 ? 'row-odd' : ''} ${profit < 0 ? 'half-opacity-row' : ''}`}
                                                 >
                                                     <td>
                                                         {craftItem.inputs.map(elem =>
@@ -1016,42 +978,87 @@ class CalcPage extends React.Component {
                                                     <td>
                                                         {selectBuySystem
                                                             ? selectBuySystem.label
-                                                            : uniq.buy.every(elem => elem === uniq.buy[0])
-                                                                ? uniq.buy[0].substr(0, 1) + uniq.buy[0].substr(1).toLowerCase()
-                                                                : uniq.buy.map((systemBuy, i) =>
-                                                                <div key={i}>
-                                                                    {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
-                                                                </div>
-                                                            )
+                                                            : maxProfitItem.buy.every(elem => elem === maxProfitItem.buy[0])
+                                                                ? maxProfitItem.buy[0].substr(0, 1) + maxProfitItem.buy[0].substr(1).toLowerCase()
+                                                                : maxProfitItem.buy.map((systemBuy, i) =>
+                                                                    <div key={i}>
+                                                                        {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
+                                                                    </div>
+                                                                )
                                                         }
                                                     </td>
                                                     <td>
-                                                        {uniq.cost.toFixed(2)}
+                                                        {cost.toFixed(2)}
                                                     </td>
                                                     <td>
                                                         {craftItem.result.name} x {craftItem.result.count}
                                                     </td>
                                                     <td className='column-right'>
-                                                        {uniq.max.toFixed(2)}
+                                                        {max.toFixed(2)}
                                                     </td>
                                                     <td>
-                                                        {uniq.sell.substr(0, 1) + uniq.sell.substr(1).toLowerCase()}
+                                                        {maxProfitItem.sell.substr(0, 1) + maxProfitItem.sell.substr(1).toLowerCase()}
+                                                        {uniqTableProfits.length > 1
+                                                            ? ` + ${uniqTableProfits.length - 1}`
+                                                            : null
+                                                        }
                                                     </td>
                                                     <td className='column-right'>
-                                                        {(uniq.max - uniq.cost).toFixed(2)}
+                                                        {profit.toFixed(2)}
                                                     </td>
                                                 </tr>
-                                            )}
-                                        </React.Fragment>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
-                        : <div>
-                            tab storage
-                            это склад
-                        </div>
-                    }
+                                                {uniqTableProfits.length > 1 && uniqTableProfits.map((uniq, i, list) =>
+                                                    <tr
+                                                        onClick={this.onExpandedRowOff}
+                                                        key={uniq.key} className={`${expandedRowId !== indexRow || expandedRowId === '' ? 'invisible' : ''} ${i === 0 ? 'first' : ''} ${i === list.length - 1 ? 'last' : ''}`}
+                                                    >
+                                                        <td>
+                                                            {craftItem.inputs.map(elem =>
+                                                                <div key={elem.id}>
+                                                                    {elem.name} x {elem.count}
+                                                                </div>
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            {selectBuySystem
+                                                                ? selectBuySystem.label
+                                                                : uniq.buy.every(elem => elem === uniq.buy[0])
+                                                                    ? uniq.buy[0].substr(0, 1) + uniq.buy[0].substr(1).toLowerCase()
+                                                                    : uniq.buy.map((systemBuy, i) =>
+                                                                        <div key={i}>
+                                                                            {systemBuy.substr(0, 1) + systemBuy.substr(1).toLowerCase()}
+                                                                        </div>
+                                                                    )
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            {uniq.cost.toFixed(2)}
+                                                        </td>
+                                                        <td>
+                                                            {craftItem.result.name} x {craftItem.result.count}
+                                                        </td>
+                                                        <td className='column-right'>
+                                                            {uniq.max.toFixed(2)}
+                                                        </td>
+                                                        <td>
+                                                            {uniq.sell.substr(0, 1) + uniq.sell.substr(1).toLowerCase()}
+                                                        </td>
+                                                        <td className='column-right'>
+                                                            {(uniq.max - uniq.cost).toFixed(2)}
+                                                        </td>
+                                                    </tr>
+                                                )}
+                                            </React.Fragment>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                            : <div>
+                                tab storage
+                                это склад
+                            </div>
+                        }
+                    </FixedPosition>
                 </div>
             </React.Fragment>
         )

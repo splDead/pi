@@ -1,23 +1,30 @@
 :root {
+    --site-width: 1200px;
     --main-color: #00AEFF;
+    --main-background-color: #101010;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
     padding: 0;
     margin: 0;
-    background-color: #101010;
+    background-color: var(--main-background-color);
     color: white;
     font-family: 'Roboto', sans-serif;
 }
 
 .layout {
-    max-width: 1200px;
+    max-width: var(--site-width);
     margin: 0 auto;
     box-sizing: border-box;
 }
 
 .page__container {
-    padding: 0 10px;
+    padding: 77px 10px 0;
+    width: 100%;
 }
 
 .select-reuse__control--is-focused {

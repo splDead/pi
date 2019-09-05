@@ -3,14 +3,14 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import CalcPage from './pages/CalcPage';
-import MainMenu from './components/MainMenu';
+import Header from './components/Header';
 
 class App extends Component {
     render() {
         return (
             <div className='layout'>
                 <Router>
-                    <MainMenu />
+                    <Header />
                     <Switch>
                         <Route exact path='/' component={Home}/>
                         <Route path='/calc' component={CalcPage}/>

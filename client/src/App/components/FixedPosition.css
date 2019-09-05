@@ -1,0 +1,7 @@
+.fixed-container {
+    position: fixed;
+    width: 1180px;
+    background-color: var(--main-background-color);
+    padding-top: 30px;
+    padding-bottom: 20px;
+}

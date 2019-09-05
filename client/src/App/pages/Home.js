@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoadingForm from '../components/LoadingForm';
 import TablePrice from '../components/TablePrice';
+import FixedPosition from '../components/FixedPosition';
 
 import * as a from '../actions/dashboard';
 
@@ -18,9 +19,10 @@ class Home extends Component {
         } = this.props;
 
         return (
-            <div>
-                <LoadingForm/>
-                <TablePrice prices={prices} />
+            <div className='page__container'>
+                <FixedPosition Component={LoadingForm}>
+                    <TablePrice prices={prices} />
+                </FixedPosition>
             </div>
         )
     }

@@ -13,6 +13,7 @@
     width: 84px;
     height: 12px;
     margin-left: 30px;
+    -webkit-transform: perspective(100px) rotateX(-60deg);
     transform: perspective(100px) rotateX(-60deg);
     background: inherit;
 }
